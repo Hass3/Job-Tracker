@@ -11,20 +11,20 @@ class User(db, SerializerMixin):
     username = db.Column(db.String)
     _password_hash = db.Column(db.String)
 
-    applications= db.relationship()
-    jobs = db.relationship()
-
+    applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan')
+    jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users')
 
 class Company(db, SerializerMixin):
     __tablename__ = 'companies'
-
+                                   
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    logo = db.Column(db.String)
+    logo = db.Column(db.String)                     
     location = db.Column(db.String)
     description = db.Column(db.String)
 
-    jobs = db.relationship()
+    jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
+    
 
 class Job(db, SerializerMixin):
     __tablename__ = 'jobs'
@@ -35,9 +35,9 @@ class Job(db, SerializerMixin):
     salary = db.Column(db.Integer)
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 
 
-    applications = db.relationship()
-    users = db.relationship()
-
+    applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan')
+    users = db.relationship('User', secondary = 'applications', back_populates = 'jobs')
+    company = db.relationship('Company', back_populates = 'jobs' )
 
 class Application(db, SerializerMixin):
     __tablename__ = 'applications'
@@ -48,6 +48,5 @@ class Application(db, SerializerMixin):
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    user = db.relationship()
-    job = db.relationship()
-
+    user = db.relationship('User', back_populates = 'applications')
+    job = db.relationship('Job', back_populates = 'applictaions')
