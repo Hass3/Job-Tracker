@@ -1,22 +1,23 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db
-import flask_login
+from flask_login import UserMixin
 
 
-class User(db, SerializerMixin):
+class User(db, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     id =  db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    username = db.Column(db.String)
-    _password_hash = db.Column(db.String)
+    username = db.Column(db.String, nullable=False)
+    _password_hash = db.Column(db.String, nullable=False)
 
     applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan')
     jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users')
+    
 
 class Company(db, SerializerMixin):
     __tablename__ = 'companies'
-                                   
+                     
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     logo = db.Column(db.String)                     
@@ -24,7 +25,6 @@ class Company(db, SerializerMixin):
     description = db.Column(db.String)
 
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
-    
 
 class Job(db, SerializerMixin):
     __tablename__ = 'jobs'
