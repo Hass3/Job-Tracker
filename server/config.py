@@ -5,6 +5,7 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 
 # Instantiate app, set attributes
@@ -16,6 +17,9 @@ app.secret_key = b"\xaa\x99'\x9c\x1c\x00\xb9CX\x86n(\x0e\xe4 3"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+bcrypt = Bcrypt(app)
+
+
 
 # Define metadata, instantiate db
 metadata = MetaData(naming_convention={

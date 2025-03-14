@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
-from config import db
+from config import db, bcrypt
 from flask_login import UserMixin
+
 
 
 class User(db, SerializerMixin, UserMixin):
@@ -14,6 +15,21 @@ class User(db, SerializerMixin, UserMixin):
     applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan')
     jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users')
     
+    #salting password
+    @property
+    def password_hash(self):
+        return self._password_hash
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
+
+
+
 
 class Company(db, SerializerMixin):
     __tablename__ = 'companies'
@@ -25,6 +41,7 @@ class Company(db, SerializerMixin):
     description = db.Column(db.String)
 
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
+
 
 class Job(db, SerializerMixin):
     __tablename__ = 'jobs'
@@ -38,6 +55,7 @@ class Job(db, SerializerMixin):
     applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan')
     users = db.relationship('User', secondary = 'applications', back_populates = 'jobs')
     company = db.relationship('Company', back_populates = 'jobs' )
+
 
 class Application(db, SerializerMixin):
     __tablename__ = 'applications'
