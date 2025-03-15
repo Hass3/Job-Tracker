@@ -4,7 +4,7 @@ from flask_login import UserMixin
 
 
 
-class User(db, SerializerMixin, UserMixin):
+class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     id =  db.Column(db.Integer, primary_key = True)
@@ -15,7 +15,7 @@ class User(db, SerializerMixin, UserMixin):
     applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan')
     jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users')
     
-    #salting password
+    #salting methods 
     @property
     def password_hash(self):
         return self._password_hash
@@ -31,8 +31,8 @@ class User(db, SerializerMixin, UserMixin):
 
 
 
-class Company(db, SerializerMixin):
-    __tablename__ = 'companies'
+class Company(db.Model, SerializerMixin):
+    __tablename__  = 'companies'
                      
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
@@ -43,8 +43,8 @@ class Company(db, SerializerMixin):
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
 
 
-class Job(db, SerializerMixin):
-    __tablename__ = 'jobs'
+class Job(db.Model, SerializerMixin):
+    __tablename__  = 'jobs'
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
@@ -57,14 +57,14 @@ class Job(db, SerializerMixin):
     company = db.relationship('Company', back_populates = 'jobs' )
 
 
-class Application(db, SerializerMixin):
-    __tablename__ = 'applications'
+class Application(db.Model, SerializerMixin):
+    __tablename__  = 'applications'
 
-    id = db.Column(db.Integer)
-    appliction_date = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True)
+    application_date = db.Column(db.String)
     status = db.Column(db.String)
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
     user = db.relationship('User', back_populates = 'applications')
-    job = db.relationship('Job', back_populates = 'applictaions')
+    job = db.relationship('Job', back_populates = 'applications')

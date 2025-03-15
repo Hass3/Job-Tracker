@@ -17,6 +17,7 @@ app.secret_key = b"\xaa\x99'\x9c\x1c\x00\xb9CX\x86n(\x0e\xe4 3"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 bcrypt = Bcrypt(app)
 
 
@@ -26,8 +27,10 @@ metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
 db = SQLAlchemy(metadata=metadata)
-migrate = Migrate(app, db)
 db.init_app(app)
+
+migrate = Migrate(app, db)
+
 # Instantiate REST API
 api = Api(app)
 
