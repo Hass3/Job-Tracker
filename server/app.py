@@ -1,6 +1,7 @@
 from config import api,app,db
 from models import *
 
+
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
