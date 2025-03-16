@@ -1,6 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db, bcrypt
-from flask_login import UserMixin
+from flask_login import UserMixin, login_manager
 
 
 
@@ -27,7 +27,10 @@ class User(db.Model, SerializerMixin, UserMixin):
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
-
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        return db.session.get(User, int(user_id))
 
 
 
