@@ -10,7 +10,7 @@ const Signup = ()=>{
             <input placeholder="Enter Name"/>
             <input placeholder="Enter Username"/>
             <input placeholder="Enter Password"/>
-
+            <button>Sign Up</button>
         </form>
         </>
     )
