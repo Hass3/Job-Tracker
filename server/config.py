@@ -17,7 +17,6 @@ app.secret_key = b"\xaa\x99'\x9c\x1c\x00\xb9CX\x86n(\x0e\xe4 3"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 bcrypt = Bcrypt(app)
 
 
