@@ -40,7 +40,6 @@ class Company(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     logo = db.Column(db.String)                     
-    location = db.Column(db.String)
     description = db.Column(db.String)
 
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
@@ -52,7 +51,9 @@ class Job(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
     description = db.Column(db.String)
+    location = db.Column(db.string)
     salary = db.Column(db.Integer)
+
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 
 
     applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan')
