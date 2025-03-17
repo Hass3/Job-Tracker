@@ -13,6 +13,8 @@ class Login(Resource):
         if user and user.authenticate(password):
             login_user(user,remember=True)
             return user.to_dict(rules = '-_password_hash' ), 200
+        else:
+            return {}, 404
 
 class SignUp(Resource):
     def post(self):
@@ -42,18 +44,19 @@ class CurrentUser(Resource):
 
 class Companies(Resource):
     def get(self):
-        pass
+        companies = Companies.query.all()
+        return [c.to_dict() for c in companies], 200
+    
 
 class Jobs(Resource):
     def get(self):
+        jobs = Jobs.query.all()
+        return [j.to_dict() for j in jobs], 200
+
+class Applications(Resource):
+    def post(self):
         pass
-
-
-
-
-
-
-
+    
 
 
 api.add_resource(Login, '/login')
