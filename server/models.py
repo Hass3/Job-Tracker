@@ -1,6 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db, bcrypt
-from flask_login import UserMixin, login_manager
+from flask_login import UserMixin
 
 
 
@@ -28,11 +28,6 @@ class User(db.Model, SerializerMixin, UserMixin):
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
     
-    @login_manager.user_loader
-    def load_user(user_id):
-        return db.session.get(User, int(user_id))
-
-
 
 class Company(db.Model, SerializerMixin):
     __tablename__  = 'companies'
@@ -51,7 +46,7 @@ class Job(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
     description = db.Column(db.String)
-    location = db.Column(db.string)
+    location = db.Column(db.String)
     salary = db.Column(db.Integer)
 
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 

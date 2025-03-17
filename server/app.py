@@ -15,7 +15,7 @@ class Login(Resource):
             return user.to_dict(rules = '-_password_hash' ), 200
         else:
             return {}, 404
-        
+    
 
 class SignUp(Resource):
     def post(self):
