@@ -1,8 +1,14 @@
-from config import api,app,db
+from config import api,app,db, login_manager
 from models import *
 from flask import request
 from flask_restful import Resource
 from flask_login import login_user, login_required, logout_user, current_user
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, int(user_id))
+
+
 
 class Login(Resource):
     def post(self):

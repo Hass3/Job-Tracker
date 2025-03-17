@@ -30,8 +30,8 @@ with app.app_context():
     db.session.commit()
 
     users = [
-        User(username="john_doe"),
-        User(username="jane_smith")
+        User(name = 'John Doe', username="john_doe12"),
+        User(name = 'Jane Smith', username="jane_smith311")
     ]
 
     users[0].password_hash = 'helloworld'
