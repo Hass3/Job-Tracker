@@ -1,18 +1,22 @@
 import { Link } from "react-router-dom";
+import CompaniesPage from "./CompaniesPage";
 
 
 
-function HomePage() {
+function HomePage({user}) {
   return (
    <>
-   <h1>Hello and welcome to apply wise. Apply wise is a Job application tracker that 
-    helps you orgainze all of your job applications.</h1>
-   <Link to='/login'>
-    <button>Login</button>
-  </Link>
-  <Link to='/signup'>
-    <button>Signup</button>
-  </Link>
+  {user?(
+  <>
+  <h2>Welcome Back,{user.name} </h2>
+  </>
+  ) :
+    (
+    <>
+    <h2>Please Login in Or Sign Up</h2>  
+    </>
+    )
+  }
    </> 
 
   )

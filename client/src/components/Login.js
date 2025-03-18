@@ -1,6 +1,7 @@
 import { useState} from "react"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import NavBar from "./NavBar";
 
 function Login(){
     const fromSchema = yup.object().shape({
@@ -36,6 +37,7 @@ function Login(){
 
     return(
         <>
+        <NavBar/>
         <form onSubmit={formik.onSubmit}>
             <input placeholder="Enter Username"/>
             <input placeholder="Enter Password"/>

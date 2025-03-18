@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import HomePage from "./HomePage"
 import Login from "./Login"
 import Signup from "./SignUp"
+import NavBar from "./NavBar"
+
 function App(){
     const [user, setUser] = useState(null)
 
@@ -12,13 +14,11 @@ function App(){
           r.json().then((user)=> setUser(user))
         }
       })
-    })
-
-
+    },[])
 
     return(
        <>
-
+         <NavBar user = {user} setUser = {setUser}/>
          <HomePage/>
        </>
       )
