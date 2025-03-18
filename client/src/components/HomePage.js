@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 
-const HomePage = ()=> {
+function HomePage() {
   return (
    <>
    <h1>Hello and welcome to apply wise. Apply wise is a Job application tracker that 

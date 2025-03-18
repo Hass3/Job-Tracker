@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 
 
-const Signup = ()=>{
+function Signup(){
 
     return(
         <>

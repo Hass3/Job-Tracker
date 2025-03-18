@@ -49,10 +49,12 @@ class CurrentUser(Resource):
             False
         
 class Companies(Resource):
+    @login_required
     def get(self):
         companies = Companies.query.all()
         return [c.to_dict() for c in companies], 200
     
+    @login_required
     def post(self):
         new_company = Company(name = request.get_json()['name'], logo = request.get_json()['logo'], location = request.get_json()['location'], description = request.get_json()['description'])
         db.session.add(new_company)
@@ -61,10 +63,11 @@ class Companies(Resource):
     
 
 class Jobs(Resource):
+    @login_required
     def get(self):
         jobs = Jobs.query.all()
         return [j.to_dict() for j in jobs], 200
-    
+    @login_required
     def post(self):
         new_job = Job(title = request.get_json()['title'], description = request.get_json()['description'], salary = request.get_json()['salary'])
         db.session.add(new_job)
@@ -72,6 +75,8 @@ class Jobs(Resource):
         return new_job.to_dict(), 201
 
 class Applications(Resource):
+
+    @login_required
     def post(self):
         new_application = Application(user_id = request.get_json()['user_id'], job_id = request.get_json()['job_id'], application_date = request.get_json()['application_date'], status = request.get_json()['status'])
         db.session.add(new_application)
@@ -82,7 +87,7 @@ class Applications(Resource):
 api.add_resource(Login, '/login')
 api.add_resource(SignUp, '/signup')
 api.add_resource(Logout, '/logout')
-api.add_resource(CurrentUser, '/currentuser')
+api.add_resource(CurrentUser, '/current_user')
 api.add_resource(Companies, '/companies')
 api.add_resource(Jobs, '/jobs')
 api.add_resource(Applications,'/applications')
