@@ -46,7 +46,7 @@ class CurrentUser(Resource):
         if current_user.is_authenticated:
             return current_user.to_dict()
         else:
-            False
+            return {}, 400
         
 class Companies(Resource):
     @login_required

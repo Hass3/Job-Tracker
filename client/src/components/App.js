@@ -8,14 +8,14 @@ import { useState } from "react";
 
 
 function App(){
-    const [user, setUser]= useState(null)
+    
     return(
         <UserProvider>
             <NavBar />
-            <Home user={user} setUser = {setUser}/>
-            <Login setUser = {setUser}/>
-            <SignUp setUser = {setUser}/>
-            <CompaniesPage  user={user}/>
+            <Home />
+            <Login />
+            <SignUp />
+            <CompaniesPage />
         </UserProvider>
     )
 }

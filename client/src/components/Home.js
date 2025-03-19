@@ -9,13 +9,7 @@ import { UserContext } from "../UserContext"
 function Home(){
     const {user, setUser}= useContext(UserContext)
 
-    useEffect(()=>{
-      fetch('/current_user').then((r)=>{
-        if(r.ok){
-          r.json().then((user)=> setUser(user))
-        }
-      })
-    },[])
+    
 
     return(
        <>
