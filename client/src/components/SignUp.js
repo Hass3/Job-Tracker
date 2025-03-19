@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import NavBar from "./NavBar";
 
-function Signup(){
+function SignUp(){
 
     return(
         <>
@@ -17,4 +17,4 @@ function Signup(){
     )
 }
 
-export default Signup
+export default SignUp

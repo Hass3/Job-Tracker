@@ -2,12 +2,15 @@ import { useState} from "react"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import NavBar from "./NavBar";
+import { useNavigate } from "react-router-dom";
 
-function Login(){
+function Login({setUser}){
+    const navagate = useNavigate()
     const fromSchema = yup.object().shape({
         username: yup.string().required('Must Enter username'),
         password: yup.string().required("Must Enter password")
     })
+
 
     const formik = useFormik({
         initialValues:{
@@ -23,15 +26,18 @@ function Login(){
             fetch('/login',{
                 method:"POST",
                 headers:{
-                    "Content-Type": "application/json"
+                    "Content-name": "application/json"
                 },
                 body: JSON.stringify(formJson)
             })
-            // .then(r =>{
-            //     if (r.ok)=>{
-            //         r.json().then(user)
-            //     }
-            // })
+            .then(r =>{
+                if (r.ok){
+                    r.json().then(user => {
+                        setUser(user)
+                        navagate('/compaines')
+                })
+                }
+            })
         }
     })
 
@@ -39,9 +45,20 @@ function Login(){
         <>
         <NavBar/>
         <form onSubmit={formik.onSubmit}>
-            <input placeholder="Enter Username"/>
-            <input placeholder="Enter Password"/>
-            <button>Login</button>
+            <input name="username" 
+            onChange={formik.handleChange}
+            value={formik.values.username} 
+            placeholder="Enter Username"/>
+
+            <input name="password" 
+            onChange={formik.handleChange} 
+            value={formik.values.password} 
+            placeholder="Enter Password"/>
+            
+            <button type="submit">Login</button>
+            
+            <p>{formik.errors.username}</p>
+            <p>{formik.errors.password}</p>
         </form>
         </>
     )

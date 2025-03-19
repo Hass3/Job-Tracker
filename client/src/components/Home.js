@@ -29,7 +29,7 @@ function Home(){
           :(
             <>
             <h2>Welcome back {user.name}</h2>
-            <CompaniesPage/>
+            <CompaniesPage />
             </>
           )
          }
