@@ -1,13 +1,12 @@
-import HomePage from "./components/HomePage";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
 import CompaniesPage from "./components/CompaniesPage";
-import App from "./components/App";
+import Home from "./components/Home";
 
 const routes = [
     {
         path: '/',
-        element:<App/>
+        element:<Home/>
     },
     {
         path:'/login',
