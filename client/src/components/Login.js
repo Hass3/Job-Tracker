@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 function Login(){
     const navagate = useNavigate()
+    
     const {user, setUser}= useContext(UserContext)
+
     const fromSchema = yup.object().shape({
         username: yup.string().required('Must Enter username'),
         password: yup.string().required("Must Enter password")

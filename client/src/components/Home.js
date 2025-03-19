@@ -19,7 +19,7 @@ function Home(){
 
     return(
        <>
-         <NavBar user = {user} setUser = {setUser}/>
+         <NavBar />
          <h1>Hello And Welcome to Apply wise an organizer To keep track of all your Job Applications </h1>
          {
           !user ? (

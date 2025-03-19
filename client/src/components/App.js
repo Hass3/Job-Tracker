@@ -1,24 +1,21 @@
-import { BrowserRouter as Router,Routes ,Route} from "react-router-dom";
+
 import { UserProvider } from "../UserContext";
 import NavBar from "./NavBar";
 import CompaniesPage from "./CompaniesPage";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import { useState } from "react";
 
 
 function App(){
-
+    const [user, setUser]= useState(null)
     return(
         <UserProvider>
-         <Router>
             <NavBar />
-         </Router>
-         <Routes>
-            <Route path="/" element ={<Home/>}/>
-            <Route path="/login" element ={<Login/>}/>
-            <Route path="/signup" element ={<SignUp/>}/>
-            <Route path="/compaines" element ={<CompaniesPage/>}/>
-         </Routes>
+            <Home user={user} setUser = {setUser}/>
+            <Login setUser = {setUser}/>
+            <SignUp setUser = {setUser}/>
+            <CompaniesPage  user={user}/>
         </UserProvider>
     )
 }
