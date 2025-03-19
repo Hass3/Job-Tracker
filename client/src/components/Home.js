@@ -1,12 +1,13 @@
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Login from "./Login"
 import Signup from "./SignUp"
 import NavBar from "./NavBar"
 import CompaniesPage from "./CompaniesPage"
+import { UserContext } from "../UserContext"
 
 function Home(){
-    const [user, setUser] = useState(null)
+    const {user, setUser}= useContext(UserContext)
 
     useEffect(()=>{
       fetch('/current_user').then((r)=>{

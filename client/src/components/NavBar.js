@@ -1,6 +1,8 @@
 import {NavLink} from "react-router-dom"
-
-function NavBar({user, setUser}){
+import { useContext } from "react"
+import { UserContext } from "../UserContext"
+function NavBar(){
+  const {user, setUser}= useContext(UserContext)
     return(
         <>
         <nav className="navbar">

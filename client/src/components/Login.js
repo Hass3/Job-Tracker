@@ -1,11 +1,12 @@
-import { useState} from "react"
+import { useState, useContext} from "react"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
-
-function Login({setUser}){
+import { UserContext } from "../UserContext";
+function Login(){
     const navagate = useNavigate()
+    const {user, setUser}= useContext(UserContext)
     const fromSchema = yup.object().shape({
         username: yup.string().required('Must Enter username'),
         password: yup.string().required("Must Enter password")
