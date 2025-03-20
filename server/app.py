@@ -65,8 +65,19 @@ class CurrentUser(Resource):
 class Companies(Resource):
     @login_required
     def get(self):
-        companies = Companies.query.all()
-        return [c.to_dict() for c in companies], 200
+        companies = Company.query.all()
+        companies_dict = []
+        for c in companies:
+            c_dict = {
+                'id': c.id,
+                'name' : c.name,
+                'logo': c.logo,
+                'description': c.description
+            }
+            companies_dict.append(c_dict)
+        return companies_dict, 200
+
+    
     
     @login_required
     def post(self):

@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./NavBar";
-
+import CompanyCard from "./ComoanyCard";
 
 function CompaniesPage (){
+  const [companies, setCompanies] = useState([])
 
+  useEffect(()=>{
+    fetch('/companies')
+    .then(r=>r.json())
+    .then(companies=> setCompanies(companies))
+  }, [])
     return(
         <>
         <NavBar/>
-        <h1>Welcome to CompaniesPage</h1>
-          <p>Jobssss</p>
+        {
+          companies.map((company)=>
+          <CompanyCard
+          key={company.id}
+          company={company}
+          />
+          )
+        }
+
+        
         </>
     )
 }
