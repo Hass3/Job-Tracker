@@ -24,7 +24,7 @@ class Login(Resource):
             }
             return user_dict, 200
         else:
-            return {"Not": "Found"}, 404
+            return {"Error": "Not Found"}, 404
     
 
 class SignUp(Resource):
@@ -38,7 +38,11 @@ class SignUp(Resource):
         db.session.add(user)
         db.session.commit()
         login_user(user, remember=True)
-        return user.to_dict(rules = '-_password_hash' ),201
+        user_dict = {
+                'name': user.name,
+                'username': user.username
+            }
+        return user_dict,201
 
 
 class Logout(Resource):
@@ -50,7 +54,11 @@ class Logout(Resource):
 class CurrentUser(Resource):
     def get(self):
         if current_user.is_authenticated:
-            return current_user.to_dict()
+            user_dict = {
+                'name': current_user.name,
+                'username': current_user.username
+            }
+            return user_dict, 200
         else:
             return {'not': 'Found'}, 400
         

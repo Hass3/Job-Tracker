@@ -21,8 +21,8 @@ function Home(){
           )
           :(
             <>
-            <h2>Welcome back {user.name}</h2>
-            <CompaniesPage />
+            <h1>{user.name}, Please Choose your Option</h1>
+             
             </>
           )
          }

@@ -48,6 +48,9 @@ function NavBar(){
           >
            Home
           </NavLink>
+          <NavLink  to='/companies'>
+          companies
+          </NavLink>
           <button onClick={logOut} className="navLink">Logout</button>
         </>
         )
