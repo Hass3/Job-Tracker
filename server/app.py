@@ -8,28 +8,34 @@ from flask_login import login_user, login_required, logout_user, current_user
 def load_user(user_id):
     return db.session.get(User, int(user_id))
 
-
-
 class Login(Resource):
     def post(self):
-        username = request.get_json(['username'])
-        password = request.get_json(['password'])
+        username = request.get_json()['username']
+        password = request.get_json()['password']
 
         user = User.query.filter_by(username=username).first()
         if user and user.authenticate(password):
             login_user(user,remember=True)
-            return user.to_dict(rules = '-_password_hash' ), 200
+            db.session.add(user)
+            db.session.commit()
+            user_dict = {
+                'name': user.name,
+                'username': user.username
+            }
+            return user_dict, 200
         else:
-            return {}, 404
+            return {"Not": "Found"}, 404
     
 
 class SignUp(Resource):
     def post(self):
+        name = request.get_json()['name']
         username = request.get_json()['username']
         password = request.get_json()['password']
-        user = User(username=username)
+
+        user = User(name=name,username=username)
         user.password_hash = password
-        db.session.add()
+        db.session.add(user)
         db.session.commit()
         login_user(user, remember=True)
         return user.to_dict(rules = '-_password_hash' ),201
@@ -46,7 +52,7 @@ class CurrentUser(Resource):
         if current_user.is_authenticated:
             return current_user.to_dict()
         else:
-            return {}, 400
+            return {'not': 'Found'}, 400
         
 class Companies(Resource):
     @login_required

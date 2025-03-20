@@ -8,9 +8,7 @@ import { UserContext } from "../UserContext"
 
 function Home(){
     const {user, setUser}= useContext(UserContext)
-
     
-
     return(
        <>
          <NavBar />

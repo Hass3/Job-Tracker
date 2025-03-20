@@ -12,8 +12,8 @@ class User(db.Model, SerializerMixin, UserMixin):
     username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
 
-    applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan')
-    jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users')
+    applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan', overlaps = 'user')
+    jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users',overlaps="users")
     
     #salting methods 
     @property
@@ -51,8 +51,8 @@ class Job(db.Model, SerializerMixin):
 
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 
 
-    applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan')
-    users = db.relationship('User', secondary = 'applications', back_populates = 'jobs')
+    applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan', overlaps = 'job')
+    users = db.relationship('User', secondary = 'applications', back_populates = 'jobs', overlaps="jobs")
     company = db.relationship('Company', back_populates = 'jobs' )
 
 
@@ -65,5 +65,5 @@ class Application(db.Model, SerializerMixin):
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    user = db.relationship('User', back_populates = 'applications')
-    job = db.relationship('Job', back_populates = 'applications')
+    user = db.relationship('User', back_populates = 'applications', overlaps="user")
+    job = db.relationship('Job', back_populates = 'applications',overlaps="job")

@@ -34,4 +34,4 @@ migrate = Migrate(app, db)
 api = Api(app)
 
 # Instantiate CORS
-CORS(app)
+CORS(app, origins='http://localhost:3000/')

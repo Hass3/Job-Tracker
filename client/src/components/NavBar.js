@@ -2,7 +2,18 @@ import {NavLink} from "react-router-dom"
 import { useContext } from "react"
 import { UserContext } from "../UserContext"
 function NavBar(){
-  const user = useContext(UserContext)
+  const {user ,setUser} = useContext(UserContext)
+   
+  const logOut = ()=>{
+    fetch('/logout', {
+      method: 'POST', 
+      headers:{"Content-Type": "application/json"}
+    }).then(r=> {
+      if(r.ok){
+       setUser(null)
+    }})
+  }
+
     return(
         <>
         <nav className="navbar">
@@ -37,8 +48,7 @@ function NavBar(){
           >
            Home
           </NavLink>
-          <button className="navLink">Logout</button>
-        
+          <button onClick={logOut} className="navLink">Logout</button>
         </>
         )
         }

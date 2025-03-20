@@ -29,7 +29,7 @@ function Login(){
             fetch('/login',{
                 method:"POST",
                 headers:{
-                    "Content-name": "application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formJson)
             })
@@ -37,9 +37,8 @@ function Login(){
                 if (r.ok){
                     r.json().then(user => {
                         setUser(user)
-                        navagate('/compaines')
-                })
-                }
+                        console.log(user.name)
+                })}
             })
         }
     })
@@ -47,7 +46,7 @@ function Login(){
     return(
         <>
         <NavBar/>
-        <form onSubmit={formik.onSubmit}>
+        <form onSubmit={formik.handleSubmit}>
             <input name="username" 
             onChange={formik.handleChange}
             value={formik.values.username} 
