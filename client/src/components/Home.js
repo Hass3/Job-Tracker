@@ -12,10 +12,12 @@ function Home(){
     return(
        <>
          <NavBar />
-         <h1>Hello And Welcome to Apply wise an organizer To keep track of all your Job Applications </h1>
          {
-          !user ? (
-            <>
+        !user ? (
+          <>
+         <h1>Hello And Welcome to Apply wise an organizer To keep track of all your Job Applications </h1>
+        
+            
             <h2>please Login or sign up</h2>
             </>
           )
