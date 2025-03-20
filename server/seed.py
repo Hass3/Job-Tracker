@@ -9,10 +9,12 @@ with app.app_context():
     companies = [
         Company(name= "google",
                 logo ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE_FPg0lX5pQ8qRKRXtpN_GcjsxKT2GSlT6NWj9DVWQGGNrke9_4llZj1CGFea2VNKBUc&usqp=CAU", 
+                head_quarters = 'Mountain View, California', 
                 description = 'A global tech company.' ),
         Company(
                 name="Amazon",
                 logo="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+                head_quarters = 'Mountain View, California',
                 description="E-commerce and cloud computing giant."
         )
     ]

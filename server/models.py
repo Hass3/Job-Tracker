@@ -34,7 +34,8 @@ class Company(db.Model, SerializerMixin):
                      
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    logo = db.Column(db.String)                     
+    logo = db.Column(db.String)       
+    head_quarters = db.Column(db.String)             
     description = db.Column(db.String)
      
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')

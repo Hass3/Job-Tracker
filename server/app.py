@@ -72,6 +72,7 @@ class Companies(Resource):
                 'id': c.id,
                 'name' : c.name,
                 'logo': c.logo,
+                'head_quarters': c.head_quarters,
                 'description': c.description
             }
             companies_dict.append(c_dict)
