@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom"
 
 function CompanyCard({company}){
    const {id, name, logo, description} = company
    return(
     <div key={id}>
     <h3>{name}</h3>
-    <img src={logo} alt={name}/>
+    <Link to={`/company/${id}`}><img src={logo} alt={name}/></Link>
     <h4>{description}</h4>
     </div>
    )

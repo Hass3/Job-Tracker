@@ -14,7 +14,7 @@ with app.app_context():
         Company(
                 name="Amazon",
                 logo="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
-                head_quarters = 'Mountain View, California',
+                head_quarters = ' Seattle, Washington',
                 description="E-commerce and cloud computing giant."
         )
     ]
