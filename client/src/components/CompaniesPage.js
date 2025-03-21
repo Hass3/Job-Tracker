@@ -6,12 +6,13 @@ import { UserContext } from "../UserContext";
 function CompaniesPage (){
   const {user} =useContext(UserContext)
   const [companies, setCompanies] = useState([])
-
+  const [formOn, setFormOn] = useState(false)
   useEffect(()=>{
     fetch('/companies')
     .then(r=>r.json())
     .then(companies=> setCompanies(companies))
   }, [])
+
     return(
         <>
         <NavBar/>
@@ -25,7 +26,7 @@ function CompaniesPage (){
           />
           )
         }
-
+        
         
         </>
     )
