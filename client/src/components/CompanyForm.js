@@ -45,25 +45,32 @@ function CompanyForm({onAddCompany, setFormOn}){
         name='name'
         value={formik.values.name}
         onChange={formik.handleChange}
+        placeholder="Enter name"
         />
          <input
         name="logo"
         value={formik.values.logo}
         onChange={formik.handleChange}
+         placeholder="Enter Logo Url"
         />
          <input
         name='description'
         value={formik.values.description}
         onChange={formik.handleChange}
+        placeholder="Enter Description"
         />
          <input
         name='headQuarters'
         value={formik.values.headQuarters}
         onChange={formik.handleChange}
+        placeholder="Enter HQ"
         />
         <button type='submit'>Add Company To List</button>
       </form>
-      
+      <p>{formik.errors.name}</p>
+      <p>{formik.errors.logo}</p>
+      <p>{formik.errors.description}</p>
+      <p>{formik.errors.headQuarters}</p>
       </>
 
     )

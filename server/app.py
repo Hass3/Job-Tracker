@@ -95,13 +95,6 @@ class Companies(Resource):
         except:
             return {"Error": "Unsuccsusful"}, 401
 
-
-    @login_required
-    def post(self):
-        new_company = Company(name = request.get_json()['name'], logo = request.get_json()['logo'], location = request.get_json()['location'], description = request.get_json()['description'])
-        db.session.add(new_company)
-        db.session.commit()
-        return new_company.to_dict(), 201
     
 
 class Jobs(Resource):
@@ -119,12 +112,6 @@ class Jobs(Resource):
             return new_job.to_dict(), 201
         except: 
             return {"Error": "Unsuccsusful"}, 401
-    @login_required
-    def post(self):
-        new_job = Job(title = request.get_json()['title'], description = request.get_json()['description'], salary = request.get_json()['salary'])
-        db.session.add(new_job)
-        db.session.commit()
-        return new_job.to_dict(), 201
 
 class Applications(Resource):
     @login_required
