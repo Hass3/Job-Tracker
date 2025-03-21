@@ -63,6 +63,7 @@ class CurrentUser(Resource):
             return {'not': 'Found'}, 400
         
 class Companies(Resource):
+
     @login_required
     def get(self):
         companies = Company.query.all()
@@ -79,6 +80,7 @@ class Companies(Resource):
             companies_dict.append(c_dict)
         return companies_dict, 200
     
+    @login_required
     def post(self):
         try:
             new_company = Company(name=request.get_json()['name'],logo=request.get_json()['logo'],head_quarters= request.get_json()['head_quarters'],description = request.get_json()['description'])
@@ -113,6 +115,7 @@ class Jobs(Resource):
         except: 
             return {"Error": "Unsuccsusful"}, 401
 
+
 class Applications(Resource):
     @login_required
     def post(self):
@@ -134,6 +137,15 @@ class CompanyById(Resource):
             'jobs': [job.to_dict() for job in company.jobs]
         }
         return company_dict, 200
+    
+    @login_required
+    def patch(self,id):
+        company = Company.query.filter_by(id=id).first()
+        for attr in request.get_json():
+            setattr(company,attr,request.get_json()[attr])
+        db.session.add(company)
+        db.session.commit()
+        return company.to_dict(), 201
 
 
 class JobById(Resource):
@@ -141,6 +153,15 @@ class JobById(Resource):
     def get(self, id):
         job = Job.query.filter_by(id=id).first()
         return job.to_dict(), 200
+    
+    @login_required
+    def patch(self,id):
+        job = job.query.filter_by(id=id).first()
+        for attr in request.get_json():
+            setattr(job,attr,request.get_json()[attr])
+        db.session.add(job)
+        db.session.commit()
+        return job.to_dict(), 201
 
 
 api.add_resource(Login, '/login')

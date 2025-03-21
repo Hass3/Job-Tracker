@@ -2,14 +2,13 @@ import { useFormik } from "formik";
 import * as yup from 'yup'
 
 function CompanyForm({onAddCompany, setFormOn}){
-    
    const fromSchema = yup.object().shape({
        name: yup.string().required("Name Required"),
        logo: yup.string().required('Logo url Required'), 
        description: yup.string().required('Description Required'),
        headQuarters:yup.string().required('Head Quarters Required')
    })
-
+   
    const formik = useFormik({
     initialValues:{
         name: '',

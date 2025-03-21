@@ -23,6 +23,18 @@ function UserProvider({ children }) {
     .then(companies=> setCompanies(companies))
   }, [])
 
+  const handelEditCompany =(updatedCompany)=>{
+      const updatedCompanies = companies.map(c=>{
+          if(c.id === updatedCompany.id){
+              return updatedCompany
+          }else{
+              return c
+          }
+      })
+      setCompanies(updatedCompanies)
+  }
+  
+
   const contextValue ={
     user,
     setUser,

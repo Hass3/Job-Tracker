@@ -3,7 +3,7 @@ import * as yup from 'yup'
 
 
 
-function CompanyEditForm({comapny}){
+function CompanyEditForm({comapny, onEditCompany, setFormOn}){
     const fromSchema = yup.object().shape({
         name: yup.string().required("Name Required"),
         logo: yup.string().required('Logo url Required'), 
@@ -20,13 +20,29 @@ function CompanyEditForm({comapny}){
         },
         validationSchema:fromSchema,
         onSubmit:(values)=>{
-            
+            const formJson  ={
+                'name': values.name,
+                'logo': values.logo,
+                'description': values.description,
+                'head_quarters': values.headQuarters
+            }
+            fetch(`/companies/${comapny.id}`, {
+                method:"PATCH",
+                headers:{'Content-Type': 'application/json'},
+                body: JSON.stringify(formJson)
+            })
+            .then(r=>r.json())
+            .then(c=>{
+                onEditCompany(c)
+                setFormOn(on=>!on)
+            }).catch(e=>console.error('Error', e))
         }
+
     }))
 
     return(
         <>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
             <input
             name="name"
             value={formik.values.name}
@@ -49,9 +65,11 @@ function CompanyEditForm({comapny}){
             />
 
             <button type="submit">Complete</button>
-
-
         </form>
+        <p>{formik.errors.name}</p>
+        <p>{formik.errors.logo}</p>
+        <p>{formik.errors.description}</p>
+        <p>{formik.errors.headQuarters}</p>
     
         </>
     )

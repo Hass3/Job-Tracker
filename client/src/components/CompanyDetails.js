@@ -20,7 +20,21 @@ function CompanyDetails(){
        })
    }, [])
 
-    const formBtn = ()=> setFormOn(on=>!on)
+
+const formBtn = ()=> setFormOn(on=>!on)
+
+const handelEditCompany = (updatedCompany)=>{
+    const updatedCompanies = companies.map(c=>{
+        if(c.id === updatedCompany.id){
+            return updatedCompany
+        }else{
+            return c
+        }
+    })
+    setCompanies(updatedCompanies)
+    setCompany(updatedCompany)
+}
+
 
 if (!company){return <h1>Loading!</h1>}
 const {name, logo, description, head_quarters, jobs} = company
@@ -35,7 +49,12 @@ return(
 <h4>Head Quarters: {head_quarters}</h4>
 <button onClick={formBtn}>{formOn ? 'back': 'edit'}</button>
 {formOn ? 
-<CompanyEditForm comapny={company}/>: null}
+<CompanyEditForm 
+comapny={company}
+onEditCompany={handelEditCompany}
+setFormOn={setFormOn}
+/>
+: null}
 {jobs.map((job)=>
 <CompanyJobs 
 key={job.id}
