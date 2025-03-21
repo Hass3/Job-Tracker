@@ -75,11 +75,27 @@ class Companies(Resource):
                 'head_quarters': c.head_quarters,
                 'description': c.description
             }
+
             companies_dict.append(c_dict)
         return companies_dict, 200
+    
+    def post(self):
+        try:
+            new_company = Company(name=request.get_json()['name'],logo=request.get_json()['logo'],head_quarters= request.get_json()['head_quarters'],description = request.get_json()['description'])
+            db.session.add(new_company)
+            db.session.commit()
+            new_company_dict = {
+                'id': new_company.id,
+                'name' : new_company.name,
+                'logo': new_company.logo,
+                'head_quarters': new_company.head_quarters,
+                'description':  new_company.description
+            }
+            return new_company_dict, 201
+        except:
+            return {"Error": "Unsuccsusful"}, 401
 
-    
-    
+
     @login_required
     def post(self):
         new_company = Company(name = request.get_json()['name'], logo = request.get_json()['logo'], location = request.get_json()['location'], description = request.get_json()['description'])
@@ -96,13 +112,21 @@ class Jobs(Resource):
     
     @login_required
     def post(self):
+        try:
+            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=request.get_json()['salary'])
+            db.session.add(new_job)
+            db.session.commit()
+            return new_job.to_dict(), 201
+        except: 
+            return {"Error": "Unsuccsusful"}, 401
+    @login_required
+    def post(self):
         new_job = Job(title = request.get_json()['title'], description = request.get_json()['description'], salary = request.get_json()['salary'])
         db.session.add(new_job)
         db.session.commit()
         return new_job.to_dict(), 201
 
 class Applications(Resource):
-
     @login_required
     def post(self):
         new_application = Application(user_id = request.get_json()['user_id'], job_id = request.get_json()['job_id'], application_date = request.get_json()['application_date'], status = request.get_json()['status'])
