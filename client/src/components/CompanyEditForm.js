@@ -16,7 +16,7 @@ function CompanyEditForm({comapny}){
             name: `${comapny.name}`,
             logo:`${comapny.logo}`,
             description:`${comapny.description}`,
-            headQuarters: `${comapny.headQuarters}`
+            headQuarters: `${comapny.head_quarters}`
         },
         validationSchema:fromSchema,
         onSubmit:(values)=>{

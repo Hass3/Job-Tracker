@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom"
-import { useState,useEffect } from "react"
+import { useState,useEffect, useContext } from "react"
 import NavBar from "./NavBar"
 import CompanyJobs from "./CompanyJobs"
 import CompanyEditForm from "./CompanyEditForm"
+import { UserContext, UserProvider } from "../UserContext"
 
 function CompanyDetails(){
    const [company, setCompany] = useState(null)
    const [formOn, setFormOn] = useState(false)
+   const {companies, setCompanies} = useContext(UserContext)
    const parms = useParams()
    const companyId = parms.id
 
@@ -32,7 +34,8 @@ return(
 <h2>{description}</h2>
 <h4>Head Quarters: {head_quarters}</h4>
 <button onClick={formBtn}>{formOn ? 'back': 'edit'}</button>
-{formOn ? <CompanyEditForm comapny={company}/>: null}
+{formOn ? 
+<CompanyEditForm comapny={company}/>: null}
 {jobs.map((job)=>
 <CompanyJobs 
 key={job.id}

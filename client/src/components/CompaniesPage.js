@@ -5,20 +5,15 @@ import { UserContext } from "../UserContext";
 import CompanyForm from "./CompanyForm";
 
 function CompaniesPage (){
-  const {user} =useContext(UserContext)
-  const [companies, setCompanies] = useState([])
-  const [formOn, setFormOn] = useState(false)
+  const {user, companies, setCompanies} =useContext(UserContext)
 
-  useEffect(()=>{
-    fetch('/companies')
-    .then(r=>r.json())
-    .then(companies=> setCompanies(companies))
-  }, [])
+  const [formOn, setFormOn] = useState(false)
+  
 
   const handleAddCompany = (newCompany)=>{
     setCompanies([...companies, newCompany])
   }
-  const formBtn =()=>{setFormOn(on=>!on)}
+  const formBtn =()=> setFormOn(on=>!on)
 
     return(
         <>
