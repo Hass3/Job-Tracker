@@ -49,12 +49,14 @@ class Job(db.Model, SerializerMixin):
     description = db.Column(db.String)
     location = db.Column(db.String)
     salary = db.Column(db.Integer)
-
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 
+
+    serialize_only =('id', 'title', 'description', 'location', 'salary')
 
     applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan', overlaps = 'job')
     users = db.relationship('User', secondary = 'applications', back_populates = 'jobs', overlaps="applications")
     company = db.relationship('Company', back_populates = 'jobs' )
+
 
 
 class Application(db.Model, SerializerMixin):

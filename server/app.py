@@ -93,6 +93,7 @@ class Jobs(Resource):
     def get(self):
         jobs = Jobs.query.all()
         return [j.to_dict() for j in jobs], 200
+    
     @login_required
     def post(self):
         new_job = Job(title = request.get_json()['title'], description = request.get_json()['description'], salary = request.get_json()['salary'])
@@ -109,6 +110,27 @@ class Applications(Resource):
         db.session.commit()
         return new_application.to_dict(), 201
 
+class CompanyById(Resource):
+    @login_required
+    def get(self, id):
+        company = Company.query.filter(id=id).first()
+        company_dict = {
+            'id': company.id,
+            'name' : company.name,
+            'logo': company.logo,
+            'head_quarters': company.head_quarters,
+            'description': company.description,
+            'jobs': [job.to_dict() for job in company.jobs]
+        }
+        return company_dict, 200
+
+
+class JobById(Resource):
+    @login_required
+    def get(self, id):
+        job = Job.query.filter(id=id).first()
+        return job.to_dict(), 200
+
 
 api.add_resource(Login, '/login')
 api.add_resource(SignUp, '/signup')
@@ -117,7 +139,8 @@ api.add_resource(CurrentUser, '/current_user')
 api.add_resource(Companies, '/companies')
 api.add_resource(Jobs, '/jobs')
 api.add_resource(Applications,'/applications')
-
+api.add_resource(CompanyById, '/companies/<id:int>')
+api.add_resource(JobById, '/jobs/<id:int>')
 
 if __name__ == '__main__':
     app.run(port=5555,debug=True)
