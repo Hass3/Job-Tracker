@@ -113,7 +113,7 @@ class Applications(Resource):
 class CompanyById(Resource):
     @login_required
     def get(self, id):
-        company = Company.query.filter(id=id).first()
+        company = Company.query.filter_by(id=id).first()
         company_dict = {
             'id': company.id,
             'name' : company.name,
@@ -128,7 +128,7 @@ class CompanyById(Resource):
 class JobById(Resource):
     @login_required
     def get(self, id):
-        job = Job.query.filter(id=id).first()
+        job = Job.query.filter_by(id=id).first()
         return job.to_dict(), 200
 
 
@@ -139,8 +139,8 @@ api.add_resource(CurrentUser, '/current_user')
 api.add_resource(Companies, '/companies')
 api.add_resource(Jobs, '/jobs')
 api.add_resource(Applications,'/applications')
-api.add_resource(CompanyById, '/companies/<id:int>')
-api.add_resource(JobById, '/jobs/<id:int>')
+api.add_resource(CompanyById, '/companies/<int:id>')
+api.add_resource(JobById, '/jobs/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555,debug=True)

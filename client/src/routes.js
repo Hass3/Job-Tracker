@@ -2,6 +2,7 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import CompaniesPage from "./components/CompaniesPage";
 import Home from "./components/Home";
+import CompanyDetails from "./components/CompanyDetails";
 
 const routes = [
     {
@@ -20,6 +21,10 @@ const routes = [
         path:'/companies',
         element:<CompaniesPage/>
     }, 
+    {
+        path:'/companies/:id',
+        element:<CompanyDetails/>
+    }
 
 ]
 

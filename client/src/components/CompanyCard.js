@@ -5,7 +5,7 @@ function CompanyCard({company}){
    return(
     <div key={id}>
     <h3>{name}</h3>
-    <Link to={`/company/${id}`}><img src={logo} alt={name}/></Link>
+    <Link to={`/companies/${id}`}><img src={logo} alt={name}/></Link>
     <h4>{description}</h4>
     </div>
    )
