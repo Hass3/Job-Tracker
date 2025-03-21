@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from 'yup'
 
-function CompanyForm(){
+function CompanyForm({onAddCompany, setFormOn}){
     
    const fromSchema = yup.object().shape({
        name: yup.string().required("Name Required"),
@@ -25,13 +25,22 @@ function CompanyForm(){
             'description': values.description,
             'head_quarters': values.headQuarters
         }
+        fetch('/companies',{
+            method:"POST", 
+            headers:{"Content-Type" : "application/json"},
+            body:JSON.stringify(formJson)
+        })
+        .then(r=>r.json())
+        .then(c=> onAddCompany(c) )
+        setFormOn((on)=>!on)
     }
+       
    })
    
 
     return(
       <>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <input
         name='name'
         value={formik.values.name}
@@ -52,7 +61,7 @@ function CompanyForm(){
         value={formik.values.headQuarters}
         onChange={formik.handleChange}
         />
-
+        <button type='submit'>Add Company To List</button>
       </form>
       
       </>

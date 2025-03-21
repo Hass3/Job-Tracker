@@ -19,6 +19,7 @@ function CompanyDetails(){
 if (!company){return <h1>Loading!</h1>}
 const {name, logo, description, head_quarters, jobs} = company
 
+
 return(
 <>
 <NavBar/>
