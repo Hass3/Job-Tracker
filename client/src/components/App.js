@@ -1,5 +1,4 @@
 
-import { UserProvider } from "../UserContext";
 import NavBar from "./NavBar";
 import CompaniesPage from "./CompaniesPage";
 import SignUp from "./SignUp";

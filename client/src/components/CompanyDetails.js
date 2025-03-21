@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useState,useEffect, useContext } from "react"
 import NavBar from "./NavBar"
 import CompanyJobs from "./CompanyJobs"
@@ -8,10 +8,12 @@ import { UserContext, UserProvider } from "../UserContext"
 function CompanyDetails(){
    const [company, setCompany] = useState(null)
    const [formOn, setFormOn] = useState(false)
-   const {companies, setCompanies} = useContext(UserContext)
+   const {companies, setCompanies, onDeleteCompany} = useContext(UserContext)
    const parms = useParams()
    const companyId = parms.id
+   const navagate = useNavigate()
 
+   
    useEffect(()=>{
        fetch(`/companies/${companyId}`)
        .then(r=>r.json())
@@ -22,6 +24,16 @@ function CompanyDetails(){
 
 
 const formBtn = ()=> setFormOn(on=>!on)
+
+const handelDeleteClick=()=>{
+    fetch(`/companies/${companyId}`,{
+         method:'DELETE'
+      })
+      .then(r=>r.json())
+      .then(()=>onDeleteCompany(company))
+       navagate('/companies')
+   }
+
 
 const handelEditCompany = (updatedCompany)=>{
     const updatedCompanies = companies.map(c=>{
@@ -47,6 +59,7 @@ return(
 <img src={logo}/>
 <h2>{description}</h2>
 <h4>Head Quarters: {head_quarters}</h4>
+<button onClick={handelDeleteClick}>Delete Company</button>
 <button onClick={formBtn}>{formOn ? 'back': 'edit'}</button>
 {formOn ? 
 <CompanyEditForm 

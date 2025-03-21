@@ -5,8 +5,8 @@ import { useFormik } from "formik";
 import * as yup from 'yup'
 import { useNavigate } from "react-router-dom";
 
-function SignUp(){
-    const {user, setUser} = useContext(UserContext)
+function SignUp() {
+    const { user, setUser } = useContext(UserContext)
 
     const fromSchema = yup.object().shape({
         name: yup.string().required('Name is Required!'),
@@ -16,71 +16,72 @@ function SignUp(){
     })
 
     const navagate = useNavigate()
-    
+
     const formik = useFormik({
-        initialValues:{
-            name : '',
-            username:'',
+        initialValues: {
+            name: '',
+            username: '',
             password: '',
-            confirmationPassword:''
+            confirmationPassword: ''
         },
         validationSchema: fromSchema,
-        onSubmit:(values)=>{
+        onSubmit: (values) => {
             const formJson = {
-                'name':values.name,
+                'name': values.name,
                 'username': values.username,
                 'password': values.password
             }
-            fetch('/signup',{
-                method:"POST",
-                headers:{
+            fetch('/signup', {
+                method: "POST",
+                headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formJson)
             })
-            .then(r =>{
-                if (r.ok){
-                    r.json().then(user => {
-                        setUser(user)
-                        navagate('/companies')
-                })}
-            })
+                .then(r => {
+                    if (r.ok) {
+                        r.json().then(user => {
+                            setUser(user)
+                            navagate('/companies')
+                        })
+                    }
+                })
         }
     })
 
 
-    return(
+    return (
         <>
-        <NavBar/>
-        <form onSubmit={formik.handleSubmit}>
-            <input 
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            placeholder="Enter Name"/>
+            <NavBar />
+            <form onSubmit={formik.handleSubmit}>
+                <input
+                    name="name"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    placeholder="Enter Name" />
 
-            <input 
-            name="username"
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            placeholder="Enter Username"
-            />
-            <input 
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            placeholder="Enter Password"/>
-             <input 
-            name="confirmationPassword"
-            value={formik.values.confirmationPassword}
-            onChange={formik.handleChange}
-            placeholder="Confirm Password"/>
-            <button type="submit">Sign Up</button>
-            <p>{formik.errors.name}</p>
-            <p>{formik.errors.username}</p>
-            <p>{formik.errors.password}</p>
-            <p>{formik.errors.confirmationPassword}</p>
-        </form>
+                <input
+                    name="username"
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
+                    placeholder="Enter Username"
+                />
+                <input
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    placeholder="Enter Password" />
+                <input
+                    name="confirmationPassword"
+                    value={formik.values.confirmationPassword}
+                    onChange={formik.handleChange}
+                    placeholder="Confirm Password" />
+                <button type="submit">Sign Up</button>
+                <p>{formik.errors.name}</p>
+                <p>{formik.errors.username}</p>
+                <p>{formik.errors.password}</p>
+                <p>{formik.errors.confirmationPassword}</p>
+            </form>
 
         </>
     )
