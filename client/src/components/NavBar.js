@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { UserContext } from "../UserContext"
 function NavBar() {
   const { user, setUser } = useContext(UserContext)
-
+  const navagate = useNavigate()
   const logOut = () => {
     fetch('/logout', {
       method: 'POST',
@@ -11,6 +11,7 @@ function NavBar() {
     }).then(r => {
       if (r.ok) {
         setUser(null)
+        navagate('/')
       }
     })
   }

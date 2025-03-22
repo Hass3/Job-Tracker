@@ -16,16 +16,19 @@ function CompaniesPage (){
   
 
   const formBtn =()=> setFormOn(on=>!on)
-   
+    
     return(
         <>
         <NavBar/>
+         {!user? null :
         <h1>{user.name}, Welcome back. Please Select a company for more details and jobs that has been added</h1>
+        }
         <button onClick={formBtn}>{formOn?'Back':'Add Company To List'}</button>
         {formOn?
         <CompanyForm onAddCompany={handleAddCompany} setFormOn={setFormOn}/>
         : null}
-        {
+        {!companies? <h1>loading...</h1>:
+
           companies.map((company)=>
           <CompanyCard
           key={company.id}
@@ -33,7 +36,8 @@ function CompaniesPage (){
           />
           )
         }
-        
+      
+      
         </>
     )
 }

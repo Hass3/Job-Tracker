@@ -29,7 +29,7 @@ const handelDeleteClick=()=>{
     fetch(`/companies/${companyId}`,{
          method:'DELETE'
       })
-      .then(r=>r.json())
+      .then(r=>r)
       .then(()=>onDeleteCompany(company))
        navagate('/companies')
    }
