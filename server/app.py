@@ -108,7 +108,7 @@ class Jobs(Resource):
     @login_required
     def post(self):
         try:
-            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=int(request.get_json()['salary']))
+            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=int(request.get_json()['salary']) ,company_id = int(request.get_json()['salary']))
             db.session.add(new_job)
             db.session.commit()
             return new_job.to_dict(), 201

@@ -80,6 +80,8 @@ setFormOn={setFormOn}
 {jobForm? 
 <JobForm
 onAddJob={handelAddJob}
+companyId={companyId}
+setJobForm={setJobForm}
 /> : null}
 {jobs.map((job)=>
 <CompanyJobs 
