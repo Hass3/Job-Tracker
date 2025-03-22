@@ -9,9 +9,8 @@ import JobForm from "./JobForm"
 function CompanyDetails(){
    const [company, setCompany] = useState(null)
    const [formOn, setFormOn] = useState(false)
-   const [jobs, setJobs] = useState([])
    const[jobForm, setJobForm] = useState(false)
-   const {companies, setCompanies, onDeleteCompany} = useContext(UserContext)
+   const {companies, setCompanies, onDeleteCompany, jobs,setJobs} = useContext(UserContext)
    const parms = useParams()
    const companyId = parms.id
    const navagate = useNavigate()

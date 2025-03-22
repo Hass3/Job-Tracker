@@ -6,6 +6,7 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState(null)
   const [companies, setCompanies] = useState([])
+  const [jobs, setJobs] = useState([])
   useEffect(() => {
     fetch('/current_user').then((r) => {
       if (r.ok) {
@@ -33,7 +34,9 @@ function UserProvider({ children }) {
     setUser,
     companies, 
     setCompanies,
-    onDeleteCompany
+    onDeleteCompany,
+    jobs,
+    setJobs
   }
   
 
