@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import CompaniesPage from "./components/CompaniesPage";
 import Home from "./components/Home";
 import CompanyDetails from "./components/CompanyDetails";
+import JobDetails from "./components/JobDetails";
 
 const routes = [
     {
@@ -24,6 +25,10 @@ const routes = [
     {
         path:'/companies/:id',
         element:<CompanyDetails/>
+    },
+    {
+        path:'/jobs/:id',
+        element:<JobDetails/>
     }
 
 ]
