@@ -2,7 +2,7 @@ import {useFormik} from 'formik'
 import * as yup from'yup'
 
 
-function JobEditForm({job, onEditJob, setJobEdit, companyId}){
+function JobEditForm({job, onEditJob, setJobEdit, companyId,setJob}){
     const formSchema = yup.object().shape({
         title: yup.string().required('Must Enter Job Title'),
         description: yup.string().required('Must Enter Job Description'),
@@ -27,13 +27,16 @@ function JobEditForm({job, onEditJob, setJobEdit, companyId}){
                 'salary': values.salary,
                 'company_id': companyId
             }
-            fetch('/jobs', {
+            fetch(`/jobs/${job.id}`, {
                 method:'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify(jobJson)
             })
             .then(r=>r.json())
-            .then(job=>onEditJob(job))
+            .then(job=>{
+                onEditJob(job)
+                setJob(job)
+            })
             setJobEdit(on=>!on)
         }
     }) 

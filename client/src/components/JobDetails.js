@@ -42,6 +42,7 @@ function JobDetails(){
       onEditJob={handelOnEdit}
       job={job}
       setJobEdit={setJobEdit}
+      setJob={setJob}
       />:null}
 
       </>

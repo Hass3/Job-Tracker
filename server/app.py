@@ -162,7 +162,7 @@ class JobById(Resource):
     
     @login_required
     def patch(self,id):
-        job = job.query.filter_by(id=id).first()
+        job = Job.query.filter_by(id=id).first()
         for attr in request.get_json():
             setattr(job,attr,request.get_json()[attr])
         db.session.add(job)
