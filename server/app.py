@@ -108,7 +108,7 @@ class Jobs(Resource):
     @login_required
     def post(self):
         try:
-            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=request.get_json()['salary'])
+            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=int(request.get_json()['salary']))
             db.session.add(new_job)
             db.session.commit()
             return new_job.to_dict(), 201
@@ -146,16 +146,13 @@ class CompanyById(Resource):
         db.session.add(company)
         db.session.commit()
         return company.to_dict(), 201
+    
     @login_required
     def delete(self,id):
         company = Company.query.filter_by(id=id).first()
         db.session.delete(company)
         db.session.commit()
         return{},204
-
-
-
-
 
 class JobById(Resource):
     @login_required

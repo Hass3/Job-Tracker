@@ -4,26 +4,30 @@ import NavBar from "./NavBar"
 import CompanyJobs from "./CompanyJobs"
 import CompanyEditForm from "./CompanyEditForm"
 import { UserContext, UserProvider } from "../UserContext"
+import JobForm from "./JobForm"
 
 function CompanyDetails(){
    const [company, setCompany] = useState(null)
    const [formOn, setFormOn] = useState(false)
+   const [jobs, setJobs] = useState([])
+   const[jobForm, setJobForm] = useState(false)
    const {companies, setCompanies, onDeleteCompany} = useContext(UserContext)
    const parms = useParams()
    const companyId = parms.id
    const navagate = useNavigate()
 
-   
    useEffect(()=>{
        fetch(`/companies/${companyId}`)
        .then(r=>r.json())
        .then(c => {
         setCompany(c)
+        setJobs(c.jobs)
        })
    }, [])
 
 
-const formBtn = ()=> setFormOn(on=>!on)
+const formBtn = ()=> setFormOn(on=>!on)  // For Edit Form
+const jobFormbtn =()=>setJobForm(on=>!on)
 
 const handelDeleteClick=()=>{
     fetch(`/companies/${companyId}`,{
@@ -46,10 +50,13 @@ const handelEditCompany = (updatedCompany)=>{
     setCompanies(updatedCompanies)
     setCompany(updatedCompany)
 }
+const handelAddJob = (newJob)=>{
+    setJobs([...jobs,newJob])
+}
 
 
 if (!company){return <h1>Loading!</h1>}
-const {name, logo, description, head_quarters, jobs} = company
+const {name, logo, description, head_quarters} = company
 
 
 return(
@@ -61,13 +68,19 @@ return(
 <h4>Head Quarters: {head_quarters}</h4>
 <button onClick={handelDeleteClick}>Delete Company</button>
 <button onClick={formBtn}>{formOn ? 'back': 'edit'}</button>
+<button onClick={jobFormbtn}>{jobForm ? 'back': `Add Job For ${name}` }</button>
 {formOn ? 
 <CompanyEditForm 
 comapny={company}
 onEditCompany={handelEditCompany}
 setFormOn={setFormOn}
 />
+
 : null}
+{jobForm? 
+<JobForm
+onAddJob={handelAddJob}
+/> : null}
 {jobs.map((job)=>
 <CompanyJobs 
 key={job.id}
