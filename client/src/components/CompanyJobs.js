@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 function CompanyJobs({job}){
 
     const {id,title, description, location, salary } = job
-
+    
     return(
        <>
        

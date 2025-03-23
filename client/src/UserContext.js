@@ -24,11 +24,21 @@ function UserProvider({ children }) {
     .then(companies=> setCompanies(companies))
   }, [])
 
+
+  useEffect(()=>{
+    fetch('/jobs')
+    .then(r=>r.json())
+    .then(j=>setJobs(jobs))
+  }, [])
+
  const onDeleteCompany=(deletedComapny)=>{
    const updatedCompanies = companies.filter(c=>c.id !==deletedComapny.id)
    setCompanies(updatedCompanies)
  }
 
+ const onAddJob = (newJob)=>{
+  setJobs([...jobs,newJob])
+}
   const contextValue ={
     user,
     setUser,
@@ -36,7 +46,8 @@ function UserProvider({ children }) {
     setCompanies,
     onDeleteCompany,
     jobs,
-    setJobs
+    setJobs, 
+    onAddJob
   }
   
 

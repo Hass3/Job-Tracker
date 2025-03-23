@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import NavBar from "./NavBar"
 import { useContext, useEffect, useState } from "react"
 import JobEditForm from "./JobEditForm"
@@ -11,6 +11,7 @@ function JobDetails(){
    const {jobs,setJobs} = useContext(UserContext)
    const parms = useParams()
    const jobId = parms.id 
+   const navagate = useNavigate()
 
    useEffect(()=>{
     fetch(`/jobs/${jobId}`)
@@ -29,7 +30,20 @@ function JobDetails(){
         setJobs(updatedJobs)
     }
     const handelEditForm =()=>setJobEdit(on=>!on)
+    const onDeleteJob = (deletedJob)=>{
+        const updatedJobs = jobs.filter(job => job.id !== deletedJob.id)
+        setJobs(updatedJobs)
+    }
     
+    const handelDeleteClick = ()=>{
+        fetch(`/jobs/${job.id}`,{
+            method:"DELETE"
+        })
+        .then(r=>r)
+        .then(()=>onDeleteJob(job))
+        navagate(`/companies/${job.company_id}`)
+    }
+   
     if (!job){return <h1>Loading...</h1>}
 
     return(
@@ -37,12 +51,14 @@ function JobDetails(){
       <NavBar/>
       <h1>{job.title}</h1>
       <button onClick={handelEditForm}>{jobEditForm?'Back': "Edit Job"}</button>
+      <button onClick={handelDeleteClick}>remove job</button>
       {jobEditForm? 
       <JobEditForm
       onEditJob={handelOnEdit}
       job={job}
       setJobEdit={setJobEdit}
       setJob={setJob}
+      companyId={job.company_id}
       />:null}
 
       </>

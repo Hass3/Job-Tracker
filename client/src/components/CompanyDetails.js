@@ -49,9 +49,7 @@ const handelEditCompany = (updatedCompany)=>{
     setCompanies(updatedCompanies)
     setCompany(updatedCompany)
 }
-const handelAddJob = (newJob)=>{
-    setJobs([...jobs,newJob])
-}
+
 
 
 if (!company){return <h1>Loading!</h1>}
@@ -78,7 +76,7 @@ setFormOn={setFormOn}
 : null}
 {jobForm? 
 <JobForm
-onAddJob={handelAddJob}
+
 companyId={companyId}
 setJobForm={setJobForm}
 /> : null}

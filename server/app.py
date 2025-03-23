@@ -102,13 +102,13 @@ class Companies(Resource):
 class Jobs(Resource):
     @login_required
     def get(self):
-        jobs = Jobs.query.all()
+        jobs = Job.query.all()
         return [j.to_dict() for j in jobs], 200
     
     @login_required
     def post(self):
         try:
-            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=int(request.get_json()['salary']) ,company_id = int(request.get_json()['salary']))
+            new_job = Job(title=request.get_json()['title'], description=request.get_json()['description'], location=request.get_json()['location'], salary=int(request.get_json()['salary']) ,company_id = int(request.get_json()['company_id']))
             db.session.add(new_job)
             db.session.commit()
             return new_job.to_dict(), 201
@@ -168,6 +168,14 @@ class JobById(Resource):
         db.session.add(job)
         db.session.commit()
         return job.to_dict(), 201
+    
+    @login_required
+    def delete(self,id):
+        job = Job.query.filter_by(id=id).first()
+        db.session.delete(job)
+        db.session.commit()
+        return{},204
+
 
 
 api.add_resource(Login, '/login')

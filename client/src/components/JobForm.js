@@ -1,7 +1,10 @@
 import { useFormik } from "formik"
+import { useContext } from "react"
 import * as yup from 'yup'
+import { UserContext } from "../UserContext"
 
-function JobForm({onAddJob, setJobForm, companyId}){
+function JobForm({ setJobForm, companyId}){
+    const {onAddJob} = useContext(UserContext)
     const formSchema = yup.object().shape({
         title: yup.string().required('Must Enter Job Title'),
         description: yup.string().required('Must Enter Job Description'),
@@ -13,7 +16,7 @@ function JobForm({onAddJob, setJobForm, companyId}){
             title:"",
             description:"",
             location :"", 
-            salary:''
+            salary:""
         },
         validationSchema: formSchema,
         onSubmit:(values)=>{
