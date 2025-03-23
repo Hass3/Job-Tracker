@@ -3,12 +3,13 @@ import NavBar from "./NavBar"
 import { useContext, useEffect, useState } from "react"
 import JobEditForm from "./JobEditForm"
 import { UserContext } from "../UserContext"
+import ApplicationForm from "./ApplicationForm"
 
 
 function JobDetails(){
    const [job, setJob] = useState(null)
    const [jobEditForm, setJobEdit] = useState(false)
-   const [applicationForm, setApplicationForm] = useState(false)
+   const [applicationFormBtn, setApplicationFormBtn] = useState(false)
    const {jobs,setJobs} = useContext(UserContext)
    
    const parms = useParams()
@@ -45,9 +46,10 @@ function JobDetails(){
         .then(()=>onDeleteJob(job))
         navagate(`/companies/${job.company_id}`)
     }
-   
+    const applyBtnClick =() =>setApplicationFormBtn(on=>!on)
     if (!job){return <h1>Loading...</h1>}
 
+    
     return(
       <>
       <NavBar/>
@@ -64,6 +66,13 @@ function JobDetails(){
       setJob={setJob}
       companyId={job.company_id}
       />:null}
+      <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back'}</button>
+      {
+        applicationFormBtn? 
+        <ApplicationForm
+        
+        />: null
+      }
       
 
       </>
