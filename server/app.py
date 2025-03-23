@@ -119,7 +119,7 @@ class Jobs(Resource):
 class Applications(Resource):
     @login_required
     def post(self):
-        new_application = Application(user_id = request.get_json()['user_id'], job_id = request.get_json()['job_id'], application_date = request.get_json()['application_date'], status = request.get_json()['status'])
+        new_application = Application(user_id = request.get_json()['user_id'], job_id = request.get_json()['job_id'], application_date = request.get_json()['application_date'], status = request.get_json()['status'], notes = request.get_json()['notes'])
         db.session.add(new_application)
         db.session.commit()
         return new_application.to_dict(), 201

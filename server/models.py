@@ -65,6 +65,7 @@ class Application(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     application_date = db.Column(db.String)
     status = db.Column(db.String)
+    notes = db.Column(db.String)
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 

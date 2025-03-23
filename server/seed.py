@@ -43,8 +43,8 @@ with app.app_context():
     db.session.commit()
 
     applications = [
-        Application(user_id = 1, job_id = 1,  application_date="2025-03-17", status="Applied"),
-        Application(user_id=2, job_id=2, application_date="2025-03-18", status="Interview Scheduled")
+        Application(user_id = 1, job_id = 1,  application_date="2025-03-17", status="Applied", notes= 'Bayak'),
+        Application(user_id=2, job_id=2, application_date="2025-03-18", status="Interview Scheduled", notes = 'sitak')
     ]
 
     db.session.add_all(applications)
