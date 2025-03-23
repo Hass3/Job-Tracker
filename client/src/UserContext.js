@@ -25,12 +25,6 @@ function UserProvider({ children }) {
   }, [])
 
 
-  useEffect(()=>{
-    fetch('/jobs')
-    .then(r=>r.json())
-    .then(j=>setJobs(jobs))
-  }, [])
-
  const onDeleteCompany=(deletedComapny)=>{
    const updatedCompanies = companies.filter(c=>c.id !==deletedComapny.id)
    setCompanies(updatedCompanies)

@@ -8,7 +8,9 @@ import { UserContext } from "../UserContext"
 function JobDetails(){
    const [job, setJob] = useState(null)
    const [jobEditForm, setJobEdit] = useState(false)
+   const [applicationForm, setApplicationForm] = useState(false)
    const {jobs,setJobs} = useContext(UserContext)
+   
    const parms = useParams()
    const jobId = parms.id 
    const navagate = useNavigate()
@@ -50,6 +52,8 @@ function JobDetails(){
       <>
       <NavBar/>
       <h1>{job.title}</h1>
+      <h2>{job.description}</h2>
+      <h2>Salary: ${job.salary}</h2>
       <button onClick={handelEditForm}>{jobEditForm?'Back': "Edit Job"}</button>
       <button onClick={handelDeleteClick}>remove job</button>
       {jobEditForm? 
@@ -60,6 +64,7 @@ function JobDetails(){
       setJob={setJob}
       companyId={job.company_id}
       />:null}
+      
 
       </>
 
