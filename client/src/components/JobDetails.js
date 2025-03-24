@@ -10,7 +10,7 @@ function JobDetails(){
    const [job, setJob] = useState(null)
    const [jobEditForm, setJobEdit] = useState(false)
    const [applicationFormBtn, setApplicationFormBtn] = useState(false)
-   const {jobs,setJobs} = useContext(UserContext)
+   const {user,jobs,setJobs} = useContext(UserContext)
    
    const parms = useParams()
    const jobId = parms.id 
@@ -46,9 +46,10 @@ function JobDetails(){
         .then(()=>onDeleteJob(job))
         navagate(`/companies/${job.company_id}`)
     }
+    const hasApplied = job?.applications?.some(app => app.user_id === user?.id)
     const applyBtnClick =() =>setApplicationFormBtn(on=>!on)
     if (!job){return <h1>Loading...</h1>}
-
+    
     
     return(
       <>
@@ -67,12 +68,21 @@ function JobDetails(){
       companyId={job.company_id}
       />:null}
       <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back'}</button>
+
       {
         applicationFormBtn? 
         <ApplicationForm
         
         />: null
       }
+
+      <>
+      <h3>Application Status:</h3>
+      {hasApplied ? (
+        <p>You have Apllied for this Job</p>
+        
+      ): null}
+      </>
       
 
       </>

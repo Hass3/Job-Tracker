@@ -2,33 +2,21 @@ import { useFormik } from "formik"
 import * as yup from 'yup'
 
 
-function ApplicationForm(){
-    const formSchema = yup.object().shape({
-
-    })
-    
-    const formik = useFormik({
-        initialValues:{
-
-        },
-        validationSchema:formSchema,
-        onSubmit :()=>{
-            fetch('/application', {
-                method:'POST',
-                headers:{'Content-Type': 'application/json'}
-            })
-        }
-    })
 
 
+function ApplicationForm({onApply}){
 
-
-    return(
+  return(
        <>
-         <form onSubmit={formik.handleSubmit}>
-            <input/>
-            <input/>
-            <input/>
+         <form onSubmit={null}>
+            <select>
+                <option>Applied</option>
+                <option>Interview</option>
+                <option>Offer</option>
+                <option>Rejected</option>
+                <option>Pending</option>
+            </select>
+            <button type='submit'> Submit Application</button>
          </form>
        </>
 

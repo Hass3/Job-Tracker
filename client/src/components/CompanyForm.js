@@ -33,8 +33,7 @@ function CompanyForm({onAddCompany, setFormOn}){
         .then(c=> onAddCompany(c) )
         setFormOn((on)=>!on)
     }
-       
-   })
+})
    
 
     return(
