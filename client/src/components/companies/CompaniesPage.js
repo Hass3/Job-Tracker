@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import CompanyCard from "./CompanyCard";
-import { UserContext } from "../UserContext";
-import CompanyForm from "./CompanyForm";
+import { UserContext } from "../../UserContext";
+import CompanyForm from './CompanyForm'
 
 function CompaniesPage (){
   const {user, companies, setCompanies} =useContext(UserContext)

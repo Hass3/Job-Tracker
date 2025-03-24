@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState,useEffect, useContext } from "react"
-import NavBar from "./NavBar"
+import NavBar from "../NavBar"
 import CompanyJobs from "./CompanyJobs"
 import CompanyEditForm from "./CompanyEditForm"
-import { UserContext, UserProvider } from "../UserContext"
-import JobForm from "./JobForm"
+import { UserContext, UserProvider } from "../../UserContext"
+import JobForm from "../jobs/JobForm"
 
 function CompanyDetails(){
    const [company, setCompany] = useState(null)

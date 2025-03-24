@@ -1,12 +1,12 @@
 
 import NavBar from "./NavBar";
-import CompaniesPage from "./CompaniesPage";
+import CompaniesPage from "./companies/CompaniesPage";
 import SignUp from "./SignUp";
 import Login from "./Login";
-import JobDetails from "./JobDetails";
-import CompanyCard from "./CompanyCard";
-import CompanyDetails from "./CompanyDetails";
-import CompanyJobs from "./CompanyJobs";
+import JobDetails from "./jobs/JobDetails";
+import CompanyCard from "./companies/CompanyCard";
+import CompanyDetails from "./companies/CompanyDetails";
+import CompanyJobs from "./companies/CompanyJobs";
 
 
 function App(){

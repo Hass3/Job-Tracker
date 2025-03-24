@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom"
-import NavBar from "./NavBar"
+import NavBar from "../NavBar"
 import { useContext, useEffect, useState } from "react"
 import JobEditForm from "./JobEditForm"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../../UserContext"
 import ApplicationForm from "./ApplicationForm"
 
 

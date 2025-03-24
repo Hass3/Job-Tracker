@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import { useContext } from "react"
 import * as yup from 'yup'
-import { UserContext } from "../UserContext"
+import { UserContext } from "../../UserContext"
 
 function JobForm({ setJobForm, companyId}){
     const {onAddJob} = useContext(UserContext)

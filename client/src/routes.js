@@ -1,9 +1,9 @@
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-import CompaniesPage from "./components/CompaniesPage";
+import CompaniesPage from "./components/companies/CompaniesPage";
 import Home from "./components/Home";
-import CompanyDetails from "./components/CompanyDetails";
-import JobDetails from "./components/JobDetails";
+import CompanyDetails from "./components/companies/CompanyDetails";
+import JobDetails from "./components/jobs/JobDetails";
 
 const routes = [
     {
