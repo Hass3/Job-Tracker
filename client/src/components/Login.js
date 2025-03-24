@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import './loginandsignup.css'
 function Login() {
+    const [showPassword,setShowPassword] = useState(false)
     const navagate = useNavigate()
-
+    
     const { user, setUser } = useContext(UserContext)
 
     const fromSchema = yup.object().shape({
@@ -49,26 +50,35 @@ function Login() {
     return (
         <>
             <NavBar />
-        <div className="login-container">
-            <div className="login-card">
+        <div className="container">
+            
+            <div className="card">
+            <h1 className="title">ApplyWise Login</h1>
             <form onSubmit={formik.handleSubmit}>
-                <label className="l-label">Username</label>
+                <label className="label">Username</label>
                 <input name="username"
                     onChange={formik.handleChange}
                     value={formik.values.username}
                     placeholder="Enter Username" 
-                    className="l-input"/>
+                    className="input"/>
                <p className="error">{formik.errors.username}</p>
-                <label className="l-label">password</label>
+                <label className="label">password</label>
                 <input name="password"
+                    type={showPassword ? "text" : "password"}
                     onChange={formik.handleChange}
                     value={formik.values.password}
                     placeholder="Enter Password"
-                    className="l-input" />
+                    className="input" />
                 <p className="error">{formik.errors.password}</p>
-                <button className="l-button" type="submit">Login</button>
-
-               
+                <label>
+                    <input
+                    type="checkbox"
+                    checked={showPassword}
+                    onChange={()=>setShowPassword(!showPassword)}/>
+                    {showPassword? 'Hide Password': "Show Password"}
+                </label>
+                
+                <button className="button" type="submit">Login</button>
               
             </form>
             </div>
