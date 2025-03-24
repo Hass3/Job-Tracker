@@ -19,6 +19,7 @@ class Login(Resource):
             db.session.add(user)
             db.session.commit()
             user_dict = {
+                'id': user.id,
                 'name': user.name,
                 'username': user.username
             }
@@ -39,6 +40,7 @@ class SignUp(Resource):
         db.session.commit()
         login_user(user, remember=True)
         user_dict = {
+                'id': user.id,
                 'name': user.name,
                 'username': user.username
             }
@@ -55,6 +57,7 @@ class CurrentUser(Resource):
     def get(self):
         if current_user.is_authenticated:
             user_dict = {
+                'id': current_user.id,
                 'name': current_user.name,
                 'username': current_user.username
             }
@@ -119,7 +122,7 @@ class Jobs(Resource):
 class Applications(Resource):
     @login_required
     def post(self):
-        new_application = Application(user_id = request.get_json()['user_id'], job_id = request.get_json()['job_id'], application_date = request.get_json()['application_date'], status = request.get_json()['status'], notes = request.get_json()['notes'])
+        new_application = Application(application_date = request.get_json()['application_date'],status = request.get_json()['status'],notes = request.get_json()['notes'],job_id = int(request.get_json()['job_id']),  user_id = int(request.get_json()['user_id']))
         db.session.add(new_application)
         db.session.commit()
         return new_application.to_dict(), 201
@@ -175,7 +178,6 @@ class JobById(Resource):
         db.session.delete(job)
         db.session.commit()
         return{},204
-
 
 
 api.add_resource(Login, '/login')

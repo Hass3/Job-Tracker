@@ -13,7 +13,7 @@ function CompanyDetails(){
    const {companies, setCompanies, onDeleteCompany, jobs,setJobs} = useContext(UserContext)
    const parms = useParams()
    const companyId = parms.id
-   const navagate = useNavigate()
+   const navigate = useNavigate()
 
    useEffect(()=>{
        fetch(`/companies/${companyId}`)
@@ -34,7 +34,7 @@ const handelDeleteClick=()=>{
       })
       .then(r=>r)
       .then(()=>onDeleteCompany(company))
-       navagate('/companies')
+       navigate('/companies')
    }
 
 

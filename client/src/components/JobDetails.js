@@ -9,19 +9,28 @@ import ApplicationForm from "./ApplicationForm"
 function JobDetails(){
    const [job, setJob] = useState(null)
    const [jobEditForm, setJobEdit] = useState(false)
+   const [application,setApplication] = useState({})
    const [applicationFormBtn, setApplicationFormBtn] = useState(false)
    const {user,jobs,setJobs} = useContext(UserContext)
    
+   const userId = user?.id
    const parms = useParams()
    const jobId = parms.id 
    const navagate = useNavigate()
 
+
    useEffect(()=>{
     fetch(`/jobs/${jobId}`)
     .then(r=>r.json())
-    .then(j=>setJob(j))
-}, [])
-    
+    .then(j=>{
+        setJob(j)
+        const userApplication = j.applications?.find((app)=>app.user_id === userId)
+        if (userApplication){
+            setApplication(userApplication)
+        }
+    })  
+}, [jobId, userId])
+ 
     const handelOnEdit = (updatedJob)=>{
         const updatedJobs = jobs.map((job)=>{
             if(updatedJob.id == job.id){
@@ -39,7 +48,7 @@ function JobDetails(){
     }
     
     const handelDeleteClick = ()=>{
-        fetch(`/jobs/${job.id}`,{
+        fetch(`/jobs/${jobId}`,{
             method:"DELETE"
         })
         .then(r=>r)
@@ -67,28 +76,32 @@ function JobDetails(){
       setJob={setJob}
       companyId={job.company_id}
       />:null}
-      <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back'}</button>
+      {!hasApplied ? <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back' }</button>:
+      <button>Delete Application</button>
+      }
 
       {
         applicationFormBtn? 
         <ApplicationForm
-        
+        setApplication={setApplication}
+        setApplyBtn={setApplicationFormBtn}
+        jobId={job.id}
+        userId={user.id}
+    
         />: null
       }
 
       <>
       <h3>Application Status:</h3>
-      {hasApplied ? (
-        <p>You have Apllied for this Job</p>
-        
-      ): null}
+      {application?.status ? 
+        <p>You have Applied for this job. Status: {application.status }</p>
+    : <p>No Application Yet</p>}
       </>
       
 
       </>
 
-
-  )
+      )
 
 
 
