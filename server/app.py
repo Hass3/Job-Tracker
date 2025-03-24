@@ -178,6 +178,14 @@ class JobById(Resource):
         db.session.delete(job)
         db.session.commit()
         return{},204
+    
+class ApplicationById(Resource):
+    @login_required
+    def delete(self,id):
+        application = Application.query.filter_by(id=id).first()
+        db.session.delete(application)
+        db.session.commit()
+        return {},204   
 
 
 api.add_resource(Login, '/login')
@@ -189,6 +197,7 @@ api.add_resource(Jobs, '/jobs')
 api.add_resource(Applications,'/applications')
 api.add_resource(CompanyById, '/companies/<int:id>')
 api.add_resource(JobById, '/jobs/<int:id>')
+api.add_resource(ApplicationById,'/applications/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555,debug=True)

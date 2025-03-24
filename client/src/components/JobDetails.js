@@ -55,7 +55,14 @@ function JobDetails(){
         .then(()=>onDeleteJob(job))
         navagate(`/companies/${job.company_id}`)
     }
-    const hasApplied = job?.applications?.some(app => app.user_id === user?.id)
+
+    const onDeleteApplication = ()=>{
+        fetch(`/applications/${application.id}`,{
+            method:"DELETE",
+        })
+        setApplication({})
+        
+    }
     const applyBtnClick =() =>setApplicationFormBtn(on=>!on)
     if (!job){return <h1>Loading...</h1>}
     
@@ -76,8 +83,8 @@ function JobDetails(){
       setJob={setJob}
       companyId={job.company_id}
       />:null}
-      {!hasApplied ? <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back' }</button>:
-      <button>Delete Application</button>
+      {!application?.status ? <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back' }</button>:
+      <button onClick={onDeleteApplication}>Delete Application</button>
       }
 
       {
@@ -94,7 +101,7 @@ function JobDetails(){
       <>
       <h3>Application Status:</h3>
       {application?.status ? 
-        <p>You have Applied for this job. Status: {application.status }</p>
+        <p>You have Applied for this job. Status: {application.status} Notes: {application.notes} Posted date: {application.application_date}</p>
     : <p>No Application Yet</p>}
       </>
       

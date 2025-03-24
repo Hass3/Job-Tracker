@@ -19,14 +19,15 @@ function ApplicationForm({setApplication,jobId, userId, setApplyBtn}){
         method:'POST',
         headers:{'Content-Type': 'application/json'},
         body:JSON.stringify({
-          'application_date': new Date().toISOString(),
+          'application_date': new Date().toLocaleString(),
           ...values,
           'job_id': jobId,
           'user_id': userId,
         })
       })
       .then(r=>r.json())
-      .then(app=>setApplication(app))
+      .then(app=>
+      setApplication(app))
       setApplyBtn(on=>!on)
     }
   })
