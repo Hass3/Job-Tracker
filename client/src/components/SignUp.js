@@ -4,7 +4,7 @@ import { UserContext } from "../UserContext";
 import { useFormik } from "formik";
 import * as yup from 'yup'
 import { useNavigate } from "react-router-dom";
-
+import './loginandsignup.css'
 function SignUp() {
     const { user, setUser } = useContext(UserContext)
 
@@ -52,36 +52,43 @@ function SignUp() {
 
     return (
         <>
-            <NavBar />
+          <NavBar />
+          <div className="container">
+            <div className="card">
             <form onSubmit={formik.handleSubmit}>
                 <input
                     name="name"
                     value={formik.values.name}
                     onChange={formik.handleChange}
-                    placeholder="Enter Name" />
-
+                    placeholder="Enter Name" 
+                    className="input"/>
+                <p className="error">{formik.errors.name}</p>
                 <input
                     name="username"
                     value={formik.values.username}
                     onChange={formik.handleChange}
                     placeholder="Enter Username"
+                    className="input"
                 />
+                <p className="error">{formik.errors.username}</p>
                 <input
                     name="password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
-                    placeholder="Enter Password" />
+                    placeholder="Enter Password"
+                    className="input" />
+                    <p className="error">{formik.errors.password}</p>
                 <input
                     name="confirmationPassword"
                     value={formik.values.confirmationPassword}
                     onChange={formik.handleChange}
-                    placeholder="Confirm Password" />
-                <button type="submit">Sign Up</button>
-                <p>{formik.errors.name}</p>
-                <p>{formik.errors.username}</p>
-                <p>{formik.errors.password}</p>
-                <p>{formik.errors.confirmationPassword}</p>
+                    placeholder="Confirm Password" 
+                    className="input"/>
+                <p className="error">{formik.errors.confirmationPassword}</p>
+                <button className="button" type="submit">Sign Up</button>
             </form>
+            </div>
+        </div>
 
         </>
     )
