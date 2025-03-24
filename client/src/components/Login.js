@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import './loginandsignup.css'
 function Login() {
     const navagate = useNavigate()
 
@@ -48,22 +49,30 @@ function Login() {
     return (
         <>
             <NavBar />
+        <div className="login-container">
+            <div className="login-card">
             <form onSubmit={formik.handleSubmit}>
+                <label className="l-label">Username</label>
                 <input name="username"
                     onChange={formik.handleChange}
                     value={formik.values.username}
-                    placeholder="Enter Username" />
-
+                    placeholder="Enter Username" 
+                    className="l-input"/>
+               <p className="error">{formik.errors.username}</p>
+                <label className="l-label">password</label>
                 <input name="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
-                    placeholder="Enter Password" />
+                    placeholder="Enter Password"
+                    className="l-input" />
+                <p className="error">{formik.errors.password}</p>
+                <button className="l-button" type="submit">Login</button>
 
-                <button type="submit">Login</button>
-
-                <p>{formik.errors.username}</p>
-                <p>{formik.errors.password}</p>
+               
+              
             </form>
+            </div>
+        </div>
         </>
     )
 
