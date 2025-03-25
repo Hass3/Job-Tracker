@@ -3,7 +3,7 @@ import NavBar from "../NavBar";
 import CompanyCard from "./CompanyCard";
 import { UserContext } from "../../UserContext";
 import CompanyForm from './CompanyForm'
-
+import './companies.css'
 function CompaniesPage (){
   const {user, companies, setCompanies} =useContext(UserContext)
 
@@ -20,14 +20,16 @@ function CompaniesPage (){
     return(
         <>
         <NavBar/>
+        <div className="contanier">
          {!user? null :
-        <h1>{user.name}, Welcome back. Please Select a company for more details and jobs that has been added</h1>
+        <h1 className="page-h1">{user.name}, Welcome back. Please Select a company for more details and jobs that has been added</h1>
         }
-        <button onClick={formBtn}>{formOn?'Back':'Add Company To List'}</button>
+        <button className="page-button" onClick={formBtn}>{formOn?'Back':'Add Company To List'}</button>
         {formOn?
         <CompanyForm onAddCompany={handleAddCompany} setFormOn={setFormOn}/>
         : null}
-        {companies.length == 0? <h1>loading...</h1>:
+        <div className="company-list">
+        {companies.length == 0? <h1 className="loading">loading...</h1>:
         
           companies.map((company)=>
           <CompanyCard
@@ -35,8 +37,10 @@ function CompaniesPage (){
           company={company}
           />
           )
+       
         }
-      
+        </div>
+      </div>
       
         </>
     )
