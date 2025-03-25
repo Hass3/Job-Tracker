@@ -42,7 +42,7 @@ function SignUp() {
                     if (r.ok) {
                         r.json().then(user => {
                             setUser(user)
-                            navagate('/companies')
+                            navagate('/')
                         })
                     }
                 })

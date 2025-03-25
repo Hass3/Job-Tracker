@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { UserContext } from "../UserContext"
+import './navbar.css'
 function NavBar() {
   const { user, setUser } = useContext(UserContext)
   const navagate = useNavigate()
@@ -50,7 +51,7 @@ function NavBar() {
             >
               Home
             </NavLink>
-            <NavLink to='/companies'>
+            <NavLink className='navlink' to='/companies'>
               companies
             </NavLink>
             <button onClick={logOut} className="navLink">Logout</button>

@@ -1,0 +1,36 @@
+.navbar{
+  background-color: #007bff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navlink,.navLink{
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+.navlink:hover{
+    background-color: #0056b3;
+}
+
+.navLink{                      /* for logout' */
+    background-color: transparent;
+    border:  white;
+    cursor: pointer;
+}
+
+.navLink:hover{
+    background-color: #cc0000;
+}
+
+
+

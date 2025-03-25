@@ -27,8 +27,8 @@ function CompaniesPage (){
         {formOn?
         <CompanyForm onAddCompany={handleAddCompany} setFormOn={setFormOn}/>
         : null}
-        {!companies? <h1>loading...</h1>:
-
+        {companies.length == 0? <h1>loading...</h1>:
+        
           companies.map((company)=>
           <CompanyCard
           key={company.id}
