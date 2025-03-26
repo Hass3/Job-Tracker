@@ -1,6 +1,6 @@
 import { useFormik } from "formik"
 import * as yup from 'yup'
-
+import './companies.css'
 
 
 function CompanyEditForm({comapny, onEditCompany, setFormOn}){
@@ -41,37 +41,46 @@ function CompanyEditForm({comapny, onEditCompany, setFormOn}){
     }))
 
     return(
-        <>
-        <form onSubmit={formik.handleSubmit}>
+        <div className="company-form">
+            <h1>Edit Company</h1>
+            <form  onSubmit={formik.handleSubmit}>
             <input
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}
+            className="form-input"
             />
+            <p className="error">{formik.errors.name}</p>
              <input
             name="logo"
             value={formik.values.logo}
             onChange={formik.handleChange}
+            className="form-input"
             />
+            <p  className="error">{formik.errors.logo}</p>
              <input
             name="description"
             value={formik.values.description}
             onChange={formik.handleChange}
+            className="form-input"
             />
+            <p  className="error">{formik.errors.description}</p>
              <input
             name="headQuarters"
             value={formik.values.headQuarters}
             onChange={formik.handleChange}
+            className="form-input"
             />
+             <p  className="error">{formik.errors.headQuarters}</p>
 
-            <button type="submit">Complete</button>
+            <button className="form-button" type="submit">Complete</button>
         </form>
-        <p>{formik.errors.name}</p>
-        <p>{formik.errors.logo}</p>
-        <p>{formik.errors.description}</p>
-        <p>{formik.errors.headQuarters}</p>
+      
+       
+        
+       
     
-        </>
+        </div>
     )
 
 

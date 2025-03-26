@@ -2,7 +2,7 @@ import { useFormik } from "formik"
 import { useContext } from "react"
 import * as yup from 'yup'
 import { UserContext } from "../../UserContext"
-
+import '..//companies/companies.css'
 function JobForm({ setJobForm, companyId}){
     const {onAddJob} = useContext(UserContext)
     const formSchema = yup.object().shape({
@@ -38,40 +38,56 @@ function JobForm({ setJobForm, companyId}){
         }
     }) 
     return(
-        <>
+        <div className="company-form">
+        <h1 className="form-title">Add New Job</h1>
         <form  onSubmit={formik.handleSubmit}>
+            <label className="label">Title</label>
+           
             <input 
             name = 'title'
             value={formik.values.title}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
+            className="form-input"
             />
+      
+        <label className="label">Description</label>
              <input 
             name = 'description'
             value={formik.values.description}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
+             className="form-input"
             />
+          
+            <label className="label">Location</label>
              <input 
             name = 'location'
             value={formik.values.location}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
+             className="form-input"
             />
+              
+              <label className="label">Salary</label>
              <input 
             name = 'salary'
             value={formik.values.salary}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
+             className="form-input"
             />
-            <button type="submit">Add Job</button>
+           <p className="form-error">{formik.errors.title}</p>
+           <p className="form-error">{formik.errors.description}</p>
+           <p className="form-error">{formik.errors.location}</p>
+           <p className="form-error">{formik.errors.salary}</p>
+            <button className="form-button" type="submit">Add Job</button>
         </form>
-        <p>{formik.errors.title}</p>
-        <p>{formik.errors.description}</p>
-        <p>{formik.errors.location}</p>
-        <p>{formik.errors.salary}</p>
+       
+      
+      
         
-        </>
+        </div>
     )
 }
 
