@@ -5,6 +5,7 @@ import CompanyJobs from "./CompanyJobs"
 import CompanyEditForm from "./CompanyEditForm"
 import { UserContext, UserProvider } from "../../UserContext"
 import JobForm from "../jobs/JobForm"
+import './companies.css'
 
 function CompanyDetails(){
    const [company, setCompany] = useState(null)
@@ -57,13 +58,13 @@ const {name, logo, description, head_quarters} = company
 
 
 return(
-<>
+<div className="company-details">
 <NavBar/>
 <h2>{name}</h2>
 <img src={logo}/>
 <h2>{description}</h2>
 <h4>Head Quarters: {head_quarters}</h4>
-<button onClick={handelDeleteClick}>Delete Company</button>
+<button onClick={handelDeleteClick} className="delete-btn">Delete Company</button>
 <button onClick={formBtn}>{formOn ? 'back': 'edit'}</button>
 <button onClick={jobFormbtn}>{jobForm ? 'back': `Add Job For ${name}` }</button>
 {formOn ? 
@@ -86,7 +87,7 @@ key={job.id}
 job={job}
 />
 )}
-</>
+</div>
 )
 }
 
