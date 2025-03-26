@@ -21,13 +21,13 @@ function CompaniesPage (){
         <>
         <NavBar/>
         <div className="contanier">
-         {!user? null :
-        <h1 className="page-h1">{user.name}, Welcome back. Please Select a company for more details and jobs that has been added</h1>
+         {!user ? null :
+        <h1 className="page-h1">{!formOn?`Welcome back ${user.name}, Please Select a Company for more details and jobs that has been added`: null}</h1>
         }
         <button className="page-button" onClick={formBtn}>{formOn?'Back':'Add Company To List'}</button>
         {formOn?
         <CompanyForm onAddCompany={handleAddCompany} setFormOn={setFormOn}/>
-        : null}
+        : 
         <div className="company-list">
         {companies.length == 0? <h1 className="loading">loading...</h1>:
         
@@ -40,6 +40,7 @@ function CompaniesPage (){
        
         }
         </div>
+         }
       </div>
       
         </>

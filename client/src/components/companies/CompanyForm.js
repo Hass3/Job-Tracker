@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as yup from 'yup'
-
+import './companies.css'
 function CompanyForm({onAddCompany, setFormOn}){
    const fromSchema = yup.object().shape({
        name: yup.string().required("Name Required"),
@@ -37,39 +37,45 @@ function CompanyForm({onAddCompany, setFormOn}){
    
 
     return(
-      <>
+      <div className="company-form">
+        <h1 className="form-title">Add New Company</h1>
       <form onSubmit={formik.handleSubmit}>
         <input
         name='name'
         value={formik.values.name}
         onChange={formik.handleChange}
         placeholder="Enter name"
+        className="form-input"
         />
+         <p className="error">{formik.errors.name}</p>
          <input
         name="logo"
         value={formik.values.logo}
         onChange={formik.handleChange}
          placeholder="Enter Logo Url"
+         className="form-input"
         />
+         <p className="error">{formik.errors.logo}</p>
          <input
         name='description'
         value={formik.values.description}
         onChange={formik.handleChange}
         placeholder="Enter Description"
+        className="form-input"
         />
+          <p className="error">{formik.errors.description}</p>
          <input
         name='headQuarters'
         value={formik.values.headQuarters}
         onChange={formik.handleChange}
         placeholder="Enter HQ"
+        className="form-input"
         />
-        <button type='submit'>Add Company To List</button>
+        <p className="error">{formik.errors.headQuarters}</p>
+        <button className="form-button" type='submit'>Add Company To List</button>
       </form>
-      <p>{formik.errors.name}</p>
-      <p>{formik.errors.logo}</p>
-      <p>{formik.errors.description}</p>
-      <p>{formik.errors.headQuarters}</p>
-      </>
+    
+      </div>
 
     )
 
