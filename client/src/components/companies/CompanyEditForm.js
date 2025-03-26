@@ -42,36 +42,40 @@ function CompanyEditForm({comapny, onEditCompany, setFormOn}){
 
     return(
         <div className="company-form">
-            <h1>Edit Company</h1>
+            <h1 className="form-title">Edit Company</h1>
             <form  onSubmit={formik.handleSubmit}>
+                <label className="label">Comapny Name</label>
             <input
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}
             className="form-input"
             />
-            <p className="error">{formik.errors.name}</p>
+           <label className="label">Logo Url</label>
              <input
             name="logo"
             value={formik.values.logo}
             onChange={formik.handleChange}
             className="form-input"
             />
-            <p  className="error">{formik.errors.logo}</p>
+           <label className="label">Description</label>
              <input
             name="description"
             value={formik.values.description}
             onChange={formik.handleChange}
             className="form-input"
             />
-            <p  className="error">{formik.errors.description}</p>
+           <label className="label">Head Quarters</label>
              <input
             name="headQuarters"
             value={formik.values.headQuarters}
             onChange={formik.handleChange}
             className="form-input"
             />
-             <p  className="error">{formik.errors.headQuarters}</p>
+             <p className="form-error">{formik.errors.name}</p>
+             <p  className="form-error">{formik.errors.logo}</p>
+             <p  className="form-error">{formik.errors.description}</p>
+             <p  className="form-error">{formik.errors.headQuarters}</p>
 
             <button className="form-button" type="submit">Complete</button>
         </form>
