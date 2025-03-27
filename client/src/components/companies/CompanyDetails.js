@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react"
 import NavBar from "../NavBar"
 import CompanyJobs from "./CompanyJobs"
 import CompanyEditForm from "./CompanyEditForm"
-import { UserContext, UserProvider } from "../../UserContext"
+import { UserContext } from "../../UserContext"
 import JobForm from "../jobs/JobForm"
 import './companies.css'
 
@@ -23,7 +23,7 @@ function CompanyDetails() {
                 setCompany(c)
                 setJobs(c.jobs)
             })
-    }, [])
+    }, [companyId, setJobs])
 
 
     const formBtn = () => setFormOn(on => !on)  // For Edit Form
@@ -70,7 +70,7 @@ function CompanyDetails() {
                 /> :
                 <>
                     <h2>{name}</h2>
-                    <img src={logo} />
+                    <img alt={name} src={logo} />
                     <h2>{description}</h2>
                     <h4>Head Quarters: {head_quarters}</h4>
                     <button onClick={handelDeleteClick} className="delete-btn">Delete Company</button>

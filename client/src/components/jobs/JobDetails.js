@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import JobEditForm from "./JobEditForm"
 import { UserContext } from "../../UserContext"
 import ApplicationForm from "./ApplicationForm"
-
+import './jobs.css'
 
 function JobDetails(){
    const [job, setJob] = useState(null)
@@ -64,17 +64,21 @@ function JobDetails(){
         
     }
     const applyBtnClick =() =>setApplicationFormBtn(on=>!on)
-    if (!job){return <h1>Loading...</h1>}
+    if (!job){return <h1 className="loading">Loading...</h1>}
     
     
     return(
       <>
       <NavBar/>
-      <h1>{job.title}</h1>
-      <h2>{job.description}</h2>
-      <h2>Salary: ${job.salary}</h2>
-      <button onClick={handelEditForm}>{jobEditForm?'Back': "Edit Job"}</button>
-      <button onClick={handelDeleteClick}>remove job</button>
+      <div className="job-details-contanier">
+      <h1 className="job-title">{job.title}</h1>
+      <h2 className="job-description">{job.description}</h2>
+      <h2 className="job-salary">💰 Salary: ${job.salary}</h2>
+      <div className="button-container">
+      <button className="edit-btn" onClick={handelEditForm}>{jobEditForm?'Cancel Edit': "Edit Job"}</button>
+      <button className="j-delete-btn" onClick={handelDeleteClick}>Remove job</button>
+      </div>
+
       {jobEditForm? 
       <JobEditForm
       onEditJob={handelOnEdit}
@@ -83,8 +87,10 @@ function JobDetails(){
       setJob={setJob}
       companyId={job.company_id}
       />:null}
-      {!application?.status ? <button onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Back' }</button>:
-      <button onClick={onDeleteApplication}>Delete Application</button>
+
+
+      {!application?.status ? <button className="apply-btn" onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Cancel' }</button>:
+      <button className="delete-application" onClick={onDeleteApplication}>Delete Application</button>
       }
 
       {
@@ -98,14 +104,18 @@ function JobDetails(){
         />: null
       }
 
-      <>
+      <div className="application-status">
       <h3>Application Status:</h3>
       {application?.status ? 
-        <p>You have Applied for this job. Status: {application.status} Notes: {application.notes} Posted date: {application.application_date}</p>
-    : <p>No Application Yet</p>}
-      </>
-      
-
+        <p>
+        ✅ You have applied for this job. <br />
+        <strong>Status:</strong> {application.status} <br />
+        <strong>Notes:</strong> {application.notes} <br />
+        <strong>Posted On:</strong> {application.application_date}
+      </p>
+    : <p>❌ No Application Yet</p>}
+      </div>
+      </div>
       </>
 
       )
