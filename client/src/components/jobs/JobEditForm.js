@@ -1,7 +1,6 @@
 import {useFormik} from 'formik'
 import * as yup from'yup'
 
-
 function JobEditForm({job, onEditJob, setJobEdit, companyId,setJob}){
     const formSchema = yup.object().shape({
         title: yup.string().required('Must Enter Job Title'),
@@ -41,40 +40,49 @@ function JobEditForm({job, onEditJob, setJobEdit, companyId,setJob}){
         }
     }) 
     return(
-    <>
-     <form  onSubmit={formik.handleSubmit}>
+    <div className='edit-form-container'>
+        <h2 className='title'>Edit Job</h2>
+
+     <form className='edit-form' onSubmit={formik.handleSubmit}>
+     <label >Title:</label>
             <input 
             name = 'title'
             value={formik.values.title}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
             />
+            <p className='error' >{formik.errors.title}</p>
+            <label>Description:</label>
              <input 
             name = 'description'
             value={formik.values.description}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
             />
+             <p className='error'>{formik.errors.description}</p>
+             <label>Location:</label>
              <input 
             name = 'location'
             value={formik.values.location}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
             />
+              <p className='error'>{formik.errors.location}</p>
+              <label>Salary:</label>
              <input 
             name = 'salary'
             value={formik.values.salary}
             onChange={formik.handleChange}
             placeholder="Enter Here..."
             />
-            <button type="submit">Edit Job</button>
+            <p className='error'>{formik.errors.salary}</p>
+            <button className='submit-btn' type="submit">Edit Job</button>
         </form>
-        <p>{formik.errors.title}</p>
-        <p>{formik.errors.description}</p>
-        <p>{formik.errors.location}</p>
-        <p>{formik.errors.salary}</p>
+     
+       
+      
         
-        </>
+        </div>
    )
 
 

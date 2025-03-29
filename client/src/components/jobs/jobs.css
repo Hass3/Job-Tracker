@@ -83,3 +83,57 @@
     color: #555;
     margin-top: 50px;
   }
+
+
+/*Job Edit Form*/
+.edit-form-container{
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+
+.edit-form{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+.edit-form label{
+  font-weight: bold;
+}
+
+.edit-form input{
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+
+}
+
+.error{
+  color: red;
+  font-size: 14px;
+
+}
+
+.submit-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+}
+.submit-btn:hover{
+  opacity:0.8
+}
+.title{
+  justify-self: center;
+  font-weight: bold;
+  }
