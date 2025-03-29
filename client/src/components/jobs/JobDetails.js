@@ -70,28 +70,31 @@ function JobDetails(){
     return(
       <>
       <NavBar/>
-      <div className="job-details-contanier">
-      <h1 className="job-title">{job.title}</h1>
-      <h2 className="job-description">{job.description}</h2>
-      <h2 className="job-salary">💰 Salary: ${job.salary}</h2>
-      <div className="button-container">
-      <button className="edit-btn" onClick={handelEditForm}>{jobEditForm?'Cancel Edit': "Edit Job"}</button>
-      <button className="j-delete-btn" onClick={handelDeleteClick}>Remove job</button>
-      </div>
-
-      {jobEditForm? 
+      {jobEditForm ? 
       <JobEditForm
       onEditJob={handelOnEdit}
       job={job}
       setJobEdit={setJobEdit}
       setJob={setJob}
       companyId={job.company_id}
-      />:null}
-
-
+      /> :
+      <div className="job-details-contanier">
+      <h1 className="job-title">{job.title}</h1>
+      <h2 className="job-description">{job.description}</h2>
+      <h2 className="job-salary">💰 Salary: ${job.salary}</h2>
+      
+      <div className="button-container">
+      <button className="edit-btn" onClick={handelEditForm}>Edit Job</button>
+      <button className="j-delete-btn" onClick={handelDeleteClick}>Remove job</button>
       {!application?.status ? <button className="apply-btn" onClick={applyBtnClick}>{!applicationFormBtn?'Apply':'Cancel' }</button>:
       <button className="delete-application" onClick={onDeleteApplication}>Delete Application</button>
       }
+      </div>
+
+    
+
+
+    
 
       {
         applicationFormBtn? 
@@ -116,6 +119,7 @@ function JobDetails(){
     : <p>❌ No Application Yet</p>}
       </div>
       </div>
+     }
       </>
 
       )

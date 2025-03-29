@@ -40,6 +40,8 @@ function JobEditForm({job, onEditJob, setJobEdit, companyId,setJob}){
         }
     }) 
     return(
+    <>
+    <button onClick={()=>setJobEdit(on=>!on)} className='cancel-edit' >Cancel Edit</button>
     <div className='edit-form-container'>
         <h2 className='title'>Edit Job</h2>
 
@@ -83,6 +85,7 @@ function JobEditForm({job, onEditJob, setJobEdit, companyId,setJob}){
       
         
         </div>
+    </>
    )
 
 
