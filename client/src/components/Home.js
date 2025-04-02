@@ -25,10 +25,13 @@ function Home() {
         )
           : (
             <div className="user-section">
-             <NavBar />
-              <h1>{user.name}, Please Choose your Option</h1>
-              
-
+              <h1>Welcome {user.name}!</h1>
+              <h4>This Webiste helps you:</h4>
+              <li><strong>Browse through listed compaines and browse through jobs for that company</strong></li>
+              <li><strong>Add, Edit Or Remove A Company or Job for that Company</strong></li>
+              <li><strong>Submit A Personal Application status to help organize all of your applications</strong></li>
+              <h3>To Start Please Press Contiune:</h3>
+              <Link to='/companies'><button className="user-buttons">Contiune</button></Link>
             </div>
           )
       }

@@ -39,8 +39,7 @@ function Login() {
                     if (r.ok) {
                         r.json().then(user => {
                             setUser(user)
-                            navagate('/companies')
-                            console.log(user.name)
+                            navagate('/')
                         })
                     }
                 })

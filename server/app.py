@@ -4,6 +4,7 @@ from flask import request
 from flask_restful import Resource
 from flask_login import login_user, login_required, logout_user, current_user
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, int(user_id))
@@ -25,7 +26,7 @@ class Login(Resource):
             }
             return user_dict, 200
         else:
-            return {"Error": "Not Found"}, 404
+            return {"Error": " User Not Found"}, 404
     
 
 class SignUp(Resource):
@@ -54,6 +55,7 @@ class Logout(Resource):
         return {}, 200
 
 class CurrentUser(Resource):
+    @login_required
     def get(self):
         if current_user.is_authenticated:
             user_dict = {
@@ -63,7 +65,7 @@ class CurrentUser(Resource):
             }
             return user_dict, 200
         else:
-            return {'not': 'Found'}, 400
+            return {'Error': 'User Not Found'}, 400
         
 class Companies(Resource):
 

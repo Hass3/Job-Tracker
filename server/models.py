@@ -1,7 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db, bcrypt
 from flask_login import UserMixin
-
+from sqlalchemy.orm import validates
 
 
 class User(db.Model, SerializerMixin, UserMixin):
@@ -9,13 +9,12 @@ class User(db.Model, SerializerMixin, UserMixin):
 
     id =  db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    username = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
 
     applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan', overlaps = 'user')
     jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users',overlaps="applications")
     
-    #salting methods 
     @property
     def password_hash(self):
         return self._password_hash
