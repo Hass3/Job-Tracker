@@ -8,7 +8,7 @@ class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     id =  db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, nullable = False)
     username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
 
@@ -30,29 +30,29 @@ class User(db.Model, SerializerMixin, UserMixin):
 
 class Company(db.Model, SerializerMixin):
     __tablename__  = 'companies'
-                     
+    
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
-    logo = db.Column(db.String)       
-    head_quarters = db.Column(db.String)             
-    description = db.Column(db.String)
+    name = db.Column(db.String,nullable = False)
+    logo = db.Column(db.String,nullable = False)       
+    head_quarters = db.Column(db.String,nullable = False)             
+    description = db.Column(db.String,nullable = False)
      
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
     
 
 class Job(db.Model, SerializerMixin):
     __tablename__  = 'jobs'
-
+    
     id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String)
-    description = db.Column(db.String)
-    location = db.Column(db.String)
-    salary = db.Column(db.Integer)
+    title = db.Column(db.String,nullable = False)
+    description = db.Column(db.String,nullable = False)
+    location = db.Column(db.String,nullable = False)
+    salary = db.Column(db.Integer,nullable = False)
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 
 
     serialize_only =('id', 'title', 'description', 'location', 'salary', 'company_id', 'applications')
 
-    applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan', overlaps = 'job')
+    applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan', overlaps = 'job',passive_deletes=True )
     users = db.relationship('User', secondary = 'applications', back_populates = 'jobs', overlaps="applications")
     company = db.relationship('Company', back_populates = 'jobs' )
 
@@ -63,7 +63,7 @@ class Application(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     application_date = db.Column(db.String)
-    status = db.Column(db.String)
+    status = db.Column(db.String,nullable = False)
     notes = db.Column(db.String)
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))

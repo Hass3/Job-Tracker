@@ -29,7 +29,7 @@ function CompaniesPage() {
           <CompanyForm onAddCompany={handleAddCompany} setFormOn={setFormOn} />
           :
           <div className="company-list">
-            {!companies || !user ? <h1 className="loading">loading...</h1> :
+            {!Array.isArray(companies) || !user ? <h1 className="loading">loading...</h1> :
 
               companies.map((company) =>
                 <CompanyCard
@@ -49,3 +49,4 @@ function CompaniesPage() {
 
 
 export default CompaniesPage
+

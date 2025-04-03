@@ -15,18 +15,18 @@ class Login(Resource):
         password = request.get_json()['password']
 
         user = User.query.filter_by(username=username).first()
-        if user and user.authenticate(password):
-            login_user(user,remember=True)
-            db.session.add(user)
-            db.session.commit()
-            user_dict = {
-                'id': user.id,
-                'name': user.name,
-                'username': user.username
+        if not user or not user.authenticate(password):
+            return {"error": "Invaild username or passsword"}, 401
+        
+        login_user(user,remember=True)
+        db.session.add(user)
+        db.session.commit()
+        user_dict = {
+            'id': user.id,
+            'name': user.name,
+            'username': user.username
             }
-            return user_dict, 200
-        else:
-            return {"Error": " User Not Found"}, 404
+        return user_dict, 200
     
 
 class SignUp(Resource):
