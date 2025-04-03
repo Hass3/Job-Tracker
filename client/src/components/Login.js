@@ -23,7 +23,7 @@ function Login() {
             password: ''
         },
         validationSchema: fromSchema,
-        onSubmit: (values,{setErrors,setSubmitting}) => {
+        onSubmit: (values,{setErrors,setSubmitting, setValues}) => {
             const formJson = {
                 'username': values.username,
                 'password': values.password
@@ -46,6 +46,8 @@ function Login() {
                         r.json().then(error=> setErrors({password: error.error}))
                     }
                     setSubmitting(false)
+                    setValues({username:'',password:''})
+
                 })
                 
         }

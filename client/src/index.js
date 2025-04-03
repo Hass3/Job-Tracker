@@ -5,7 +5,12 @@ import { UserProvider } from './UserContext';
 import './index.css';
 import routes from './routes';
 
-const router = createBrowserRouter(routes)
+const router = createBrowserRouter(routes,{
+     future: {
+         v7_startTransition: true,
+         v7_relativeSplatPath: true
+     }
+ })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

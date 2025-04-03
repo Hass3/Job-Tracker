@@ -5,8 +5,8 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useState(null)
-  const [companies, setCompanies] = useState([])
-  const [jobs, setJobs] = useState([])
+  const [companies, setCompanies] = useState(null)
+  const [jobs, setJobs] = useState(null)
   useEffect(() => {
     fetch('/current_user').then((r) => {
       if (r.ok) {
