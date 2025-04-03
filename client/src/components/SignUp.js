@@ -25,7 +25,7 @@ function SignUp() {
             confirmationPassword: ''
         },
         validationSchema: fromSchema,
-        onSubmit: (values) => {
+        onSubmit: (values, {setErrors,setSubmitting}) => {
             const formJson = {
                 'name': values.name,
                 'username': values.username,
@@ -44,7 +44,11 @@ function SignUp() {
                             setUser(user)
                             navagate('/')
                         })
+                    
+                    }else{
+                        r.json().then(error=>setErrors({username:error.error}))
                     }
+                    setSubmitting(false)
                 })
         }
     })

@@ -31,10 +31,15 @@ class Login(Resource):
 
 class SignUp(Resource):
     def post(self):
+       
+
         name = request.get_json()['name']
         username = request.get_json()['username']
         password = request.get_json()['password']
-
+        exsiting_user = User.query.filter_by(username=username).first()
+        if exsiting_user:
+            return{'error':'username is already taken'}, 400
+        
         user = User(name=name,username=username)
         user.password_hash = password
         db.session.add(user)
