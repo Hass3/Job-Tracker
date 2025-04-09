@@ -36,10 +36,10 @@ class Login(Resource):
                             'title': a.job.title,
                             'salary':a.job.salary,
                             'description':a.job.description,
-                            'company_name':a.job.company.name
+                            'company_name':a.job.company.name,
                         }
                     }
-                    for a in current_user.applications
+                    for a in current_user.applications if a.user_id == current_user.id
                 ]
             }
         return user_dict, 200
@@ -76,10 +76,10 @@ class SignUp(Resource):
                             'title': a.job.title,
                             'salary':a.job.salary,
                             'description':a.job.description,
-                            'company_name':a.job.company.name
+                            'company_name':a.job.company.name,
                         }
                     }
-                    for a in current_user.applications
+                    for a in current_user.applications if a.user_id == current_user.id
                 ]
             }
         return user_dict,201
@@ -110,7 +110,7 @@ class CurrentUser(Resource):
                             'title': a.job.title,
                             'salary':a.job.salary,
                             'description':a.job.description,
-                            'company_name':a.job.company.name
+                            'company_name':a.job.company.name,
                         }
                     }
                     for a in current_user.applications

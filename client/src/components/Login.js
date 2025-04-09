@@ -9,7 +9,7 @@ function Login() {
     const [showPassword,setShowPassword] = useState(false)
     const navagate = useNavigate()
     
-    const { setUser } = useContext(UserContext)
+    const { setUser ,setApplications} = useContext(UserContext)
 
     const fromSchema = yup.object().shape({
         username: yup.string().required('Must Enter username'),
@@ -39,6 +39,7 @@ function Login() {
                     if (r.ok) {
                         r.json().then(user => {
                             setUser(user)
+                            setApplications(user.applications)
                             navagate('/')
                         })
                     }

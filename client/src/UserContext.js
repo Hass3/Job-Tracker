@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
@@ -9,6 +8,7 @@ function UserProvider({ children }) {
   const [jobs, setJobs] = useState(null)
   const [applications, setApplications] = useState([])
   const [job, setJob] = useState(null)
+
   useEffect(() => {
     fetch('/current_user').then((r) => {
       if (r.ok) {
@@ -19,6 +19,7 @@ function UserProvider({ children }) {
       }
       else {
         setUser(null)
+        setApplications([])
       }
     })
   }, [])
@@ -55,6 +56,7 @@ const onAddApplication = (newA)=>{
     onAddJob,
     onAddApplication,
     applications,
+    setApplications,
     job,
     setJob
 

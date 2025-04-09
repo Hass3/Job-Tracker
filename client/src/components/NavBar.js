@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { UserContext } from "../UserContext"
 import './navbar.css'
 function NavBar() {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser,setApplications } = useContext(UserContext)
   const navagate = useNavigate()
   const logOut = () => {
     fetch('/logout', {
@@ -12,6 +12,7 @@ function NavBar() {
     }).then(r => {
       if (r.ok) {
         setUser(null)
+        setApplications([])
         navagate('/')
       }
     })

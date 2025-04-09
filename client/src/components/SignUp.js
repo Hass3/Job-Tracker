@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { useNavigate } from "react-router-dom";
 import './loginandsignup.css'
 function SignUp() {
-    const { setUser } = useContext(UserContext)
+    const { setUser,setApplications } = useContext(UserContext)
     const [showPassword,setShowPassword] = useState(false);
     const fromSchema = yup.object().shape({
         name: yup.string().required('Name is Required!'),
@@ -42,6 +42,7 @@ function SignUp() {
                     if (r.ok) {
                         r.json().then(user => {
                             setUser(user)
+                            setApplications(user.applications)
                             navagate('/')
                         })
                     
