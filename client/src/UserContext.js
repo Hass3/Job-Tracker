@@ -7,10 +7,15 @@ function UserProvider({ children }) {
   const [user, setUser] = useState(null)
   const [companies, setCompanies] = useState(null)
   const [jobs, setJobs] = useState(null)
+  const [applications, setApplications] = useState([])
+  const [job, setJob] = useState(null)
   useEffect(() => {
     fetch('/current_user').then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user))
+        r.json().then((user) => {
+          setUser(user)
+          setApplications(user.applications)
+        })
       }
       else {
         setUser(null)
@@ -33,6 +38,12 @@ function UserProvider({ children }) {
  const onAddJob = (newJob)=>{
   setJobs([...jobs,newJob])
 }
+
+const onAddApplication = (newA)=>{
+  setApplications([...applications,newA])
+}
+  
+
   const contextValue ={
     user,
     setUser,
@@ -41,7 +52,13 @@ function UserProvider({ children }) {
     onDeleteCompany,
     jobs,
     setJobs, 
-    onAddJob
+    onAddJob,
+    onAddApplication,
+    applications,
+    job,
+    setJob
+
+
   }
   
 

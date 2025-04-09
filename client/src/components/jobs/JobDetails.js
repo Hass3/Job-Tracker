@@ -7,9 +7,9 @@ import ApplicationForm from "./ApplicationForm"
 import './jobs.css'
 
 function JobDetails() {
-    const [job, setJob] = useState(null)
+   
     const [applicationFormBtn, setApplicationFormBtn] = useState(false)
-    const { user, jobs } = useContext(UserContext)
+    const {user,job,setJob} = useContext(UserContext)
 
     const userId = user?.id
     const parms = useParams()
@@ -24,12 +24,8 @@ function JobDetails() {
     }, [jobId, userId])
 
 
-
-
-
     const applyBtnClick = () => setApplicationFormBtn(on => !on)
     if (!job) { return <h1 className="loading">Loading...</h1> }
-
 
     return (
         <>
@@ -45,7 +41,6 @@ function JobDetails() {
                     <button className="apply-btn" onClick={applyBtnClick}>{!applicationFormBtn ? 'Apply' : 'Cancel'}</button>
 
                 </div>
-
                 {
                     applicationFormBtn ?
                         <ApplicationForm
@@ -55,7 +50,6 @@ function JobDetails() {
 
                         /> : null
                 }
-
             </div>
 
         </>

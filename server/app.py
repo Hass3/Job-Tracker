@@ -178,10 +178,23 @@ class Applications(Resource):
     @login_required
     def post(self):
         new_application = Application(application_date = request.get_json()['application_date'],status = request.get_json()['status'],notes = request.get_json()['notes'],job_id = int(request.get_json()['job_id']),  user_id = int(request.get_json()['user_id']))
-        current_user.applications.append(new_application)
         db.session.add(new_application)
         db.session.commit()
-        return new_application.to_dict(), 201
+        new_application_dict = {
+                     'id': new_application.id,
+                        'status': new_application.status,
+                        'application_date': new_application.application_date,
+                        'notes': new_application.notes,
+                        'job': {
+                             'id': new_application.job.id,
+                            'title': new_application.job.title,
+                            'salary':new_application.job.salary,
+                            'description':new_application.job.description,
+                            'company_name':new_application.job.company.name
+                        }
+                    }
+               
+        return new_application_dict, 201
 
 class CompanyById(Resource):
     @login_required

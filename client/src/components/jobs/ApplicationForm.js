@@ -1,10 +1,14 @@
 import { useFormik } from "formik"
+import { useContext } from "react"
 import * as yup from 'yup'
+import { UserContext } from "../../UserContext"
 
 
 
 
 function ApplicationForm({jobId, userId, setApplyBtn }) {
+  const {onAddApplication,job} = useContext(UserContext)
+   
   const formSchema = yup.object().shape({
     'status': yup.string().required('status is required')
   })
@@ -23,10 +27,11 @@ function ApplicationForm({jobId, userId, setApplyBtn }) {
           ...values,
           'job_id': jobId,
           'user_id': userId,
+          'job': job
         })
       })
         .then(r => r.json())
-        .then(app => app)
+        .then(app => onAddApplication(app))
       setApplyBtn(on => !on)
     }
   })
