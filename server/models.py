@@ -15,6 +15,8 @@ class User(db.Model, SerializerMixin, UserMixin):
     applications= db.relationship('Application', back_populates = 'user', cascade='all,delete-orphan', overlaps = 'user')
     jobs = db.relationship('Job', secondary = 'applications', back_populates = 'users',overlaps="applications")
     
+    serialize_rules = ('-applications.user', '-jobs.users')
+
     @property
     def password_hash(self):
         return self._password_hash
@@ -31,6 +33,7 @@ class User(db.Model, SerializerMixin, UserMixin):
 class Company(db.Model, SerializerMixin):
     __tablename__  = 'companies'
     
+
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String,nullable = False)
     logo = db.Column(db.String,nullable = False)       
@@ -39,6 +42,7 @@ class Company(db.Model, SerializerMixin):
      
     jobs = db.relationship('Job', back_populates = 'company', cascade = 'all,delete-orphan')
     
+   
 
 class Job(db.Model, SerializerMixin):
     __tablename__  = 'jobs'
@@ -51,6 +55,7 @@ class Job(db.Model, SerializerMixin):
     company_id = db.Column(db.Integer,db.ForeignKey("companies.id")) 
 
     serialize_only =('id', 'title', 'description', 'location', 'salary', 'company_id', 'applications')
+    serialize_rules = ('-applications.jobs', '-users.jobs')
 
     applications= db.relationship('Application', back_populates = 'job', cascade='all,delete-orphan', overlaps = 'job',passive_deletes=True )
     users = db.relationship('User', secondary = 'applications', back_populates = 'jobs', overlaps="applications")
@@ -67,6 +72,7 @@ class Application(db.Model, SerializerMixin):
     notes = db.Column(db.String)
     job_id = db.Column(db.Integer, db.ForeignKey('jobs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    
     
     serialize_only = ('id', 'application_date','status','notes','job_id','user_id')
 

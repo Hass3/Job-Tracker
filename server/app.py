@@ -24,7 +24,23 @@ class Login(Resource):
         user_dict = {
             'id': user.id,
             'name': user.name,
-            'username': user.username
+            'username': user.username,
+             'applications': [
+                    {
+                        'id': a.id,
+                        'status': a.status,
+                        'application_date': a.application_date,
+                        'notes': a.notes,
+                        'job': {
+                            'id': a.job.id,
+                            'title': a.job.title,
+                            'salary':a.job.salary,
+                            'description':a.job.description,
+                            'company_name':a.job.company.name
+                        }
+                    }
+                    for a in current_user.applications
+                ]
             }
         return user_dict, 200
     
@@ -48,7 +64,23 @@ class SignUp(Resource):
         user_dict = {
                 'id': user.id,
                 'name': user.name,
-                'username': user.username
+                'username': user.username,
+                'applications': [
+                    {
+                        'id': a.id,
+                        'status': a.status,
+                        'application_date': a.application_date,
+                        'notes': a.notes,
+                        'job': {
+                             'id': a.job.id,
+                            'title': a.job.title,
+                            'salary':a.job.salary,
+                            'description':a.job.description,
+                            'company_name':a.job.company.name
+                        }
+                    }
+                    for a in current_user.applications
+                ]
             }
         return user_dict,201
 
@@ -66,7 +98,23 @@ class CurrentUser(Resource):
             user_dict = {
                 'id': current_user.id,
                 'name': current_user.name,
-                'username': current_user.username
+                'username': current_user.username,
+                'applications': [
+                    {
+                        'id': a.id,
+                        'status': a.status,
+                        'application_date': a.application_date,
+                        'notes': a.notes,
+                        'job': {
+                          'id': a.job.id,
+                            'title': a.job.title,
+                            'salary':a.job.salary,
+                            'description':a.job.description,
+                            'company_name':a.job.company.name
+                        }
+                    }
+                    for a in current_user.applications
+                ]
             }
             return user_dict, 200
         else:
@@ -189,8 +237,9 @@ class JobById(Resource):
 class ApplicationById(Resource):
     @login_required
     def delete(self,id):
+        current_user
         application = Application.query.filter_by(id=id).first()
-        db.session.delete(application)
+        db.session.delete(application) 
         db.session.commit()
         return {},204   
 

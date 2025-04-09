@@ -4,7 +4,7 @@ import CompaniesPage from "./components/companies/CompaniesPage";
 import Home from "./components/Home";
 import CompanyDetails from "./components/companies/CompanyDetails";
 import JobDetails from "./components/jobs/JobDetails";
-import JobsPage from "./components/jobs/Jobs";
+import JobsPage from "./components/jobs/JobsPage";
 
 const routes = [
     {
