@@ -4,7 +4,7 @@ import * as yup from 'yup'
 
 
 
-function ApplicationForm({ setApplication, jobId, userId, setApplyBtn }) {
+function ApplicationForm({jobId, userId, setApplyBtn }) {
   const formSchema = yup.object().shape({
     'status': yup.string().required('status is required')
   })
@@ -26,8 +26,7 @@ function ApplicationForm({ setApplication, jobId, userId, setApplyBtn }) {
         })
       })
         .then(r => r.json())
-        .then(app =>
-          setApplication(app))
+        .then(app => app)
       setApplyBtn(on => !on)
     }
   })
