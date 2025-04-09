@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import CompanyDetails from "./components/companies/CompanyDetails";
 import JobDetails from "./components/jobs/JobDetails";
 import JobsPage from "./components/jobs/JobsPage";
+import JobApplicationDetails from "./components/jobs/JopApplicationDetails";
 
 const routes = [
     {
@@ -34,6 +35,10 @@ const routes = [
     {
         path:'/jobs',
         element:<JobsPage/>
+    },
+    {
+        path:'/jobapplication/:id',
+        element:<JobApplicationDetails/>
     }
 
 ]

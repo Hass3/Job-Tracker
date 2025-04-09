@@ -36,6 +36,7 @@ class Login(Resource):
                             'title': a.job.title,
                             'salary':a.job.salary,
                             'description':a.job.description,
+                            'location':a.job.location,
                             'company_name':a.job.company.name,
                         }
                     }
@@ -76,6 +77,7 @@ class SignUp(Resource):
                             'title': a.job.title,
                             'salary':a.job.salary,
                             'description':a.job.description,
+                            'location':a.job.location,
                             'company_name':a.job.company.name,
                         }
                     }
@@ -110,6 +112,7 @@ class CurrentUser(Resource):
                             'title': a.job.title,
                             'salary':a.job.salary,
                             'description':a.job.description,
+                            'location':a.job.location,
                             'company_name':a.job.company.name,
                         }
                     }
@@ -255,7 +258,12 @@ class ApplicationById(Resource):
         application = Application.query.filter_by(id=id).first()
         db.session.delete(application) 
         db.session.commit()
-        return {},204   
+        return {},204 
+    
+    @login_required
+    def get(self,id):
+        application = [a for a in current_user.applications if a.id == id]
+        return application.to_dict()
 
 
 api.add_resource(Login, '/login')
