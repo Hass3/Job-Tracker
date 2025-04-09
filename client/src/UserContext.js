@@ -31,10 +31,6 @@ function UserProvider({ children }) {
   }, [])
 
 
- const onDeleteCompany=(deletedComapny)=>{
-   const updatedCompanies = companies.filter(c=>c.id !==deletedComapny.id)
-   setCompanies(updatedCompanies)
- }
 
  const onAddJob = (newJob)=>{
   setJobs([...jobs,newJob])
@@ -50,7 +46,6 @@ const onAddApplication = (newA)=>{
     setUser,
     companies, 
     setCompanies,
-    onDeleteCompany,
     jobs,
     setJobs, 
     onAddJob,
@@ -59,7 +54,6 @@ const onAddApplication = (newA)=>{
     setApplications,
     job,
     setJob
-
 
   }
   
