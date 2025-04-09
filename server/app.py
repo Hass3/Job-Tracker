@@ -184,15 +184,16 @@ class Applications(Resource):
         db.session.add(new_application)
         db.session.commit()
         new_application_dict = {
-                     'id': new_application.id,
+                        'id': new_application.id,
                         'status': new_application.status,
                         'application_date': new_application.application_date,
                         'notes': new_application.notes,
                         'job': {
-                             'id': new_application.job.id,
+                            'id': new_application.job.id,
                             'title': new_application.job.title,
                             'salary':new_application.job.salary,
                             'description':new_application.job.description,
+                            'location':new_application.job.location,
                             'company_name':new_application.job.company.name
                         }
                     }
@@ -262,8 +263,24 @@ class ApplicationById(Resource):
     
     @login_required
     def get(self,id):
-        application = [a for a in current_user.applications if a.id == id]
-        return application.to_dict()
+        application = None
+        for a in current_user.applications:
+            if a.id == id:
+                application = {
+                    'id': a.id,
+                    'status': a.status,
+                    'application_date': a.application_date,
+                    'notes': a.notes,
+                    'job': {
+                        'id': a.job.id,
+                        'title': a.job.title,
+                        'salary':a.job.salary,
+                        'description':a.job.description,
+                        'location':a.job.location,
+                        'company_name':a.job.company.name
+                        }
+                    }
+        return application, 200
 
 
 api.add_resource(Login, '/login')

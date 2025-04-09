@@ -6,7 +6,7 @@ function JobApplicaionCard({a}){
     const {title,company_name,location} = a.job
 
     return(
-        <Link>
+        <Link to={`/jobapplications/${a.id}`}>
         <div className="application-card">
         <p><strong>Job:</strong> {title}</p>
         <p><strong>Company:</strong> {company_name}</p>

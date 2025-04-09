@@ -37,7 +37,7 @@ const routes = [
         element:<JobsPage/>
     },
     {
-        path:'/jobapplication/:id',
+        path:'/jobapplications/:id',
         element:<JobApplicationDetails/>
     }
 
