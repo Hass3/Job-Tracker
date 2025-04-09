@@ -9,7 +9,7 @@ function Login() {
     const [showPassword,setShowPassword] = useState(false)
     const navagate = useNavigate()
     
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
 
     const fromSchema = yup.object().shape({
         username: yup.string().required('Must Enter username'),

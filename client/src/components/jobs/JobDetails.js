@@ -33,7 +33,7 @@ function JobDetails(){
  
     const handelOnEdit = (updatedJob)=>{
         const updatedJobs = jobs.map((job)=>{
-            if(updatedJob.id == job.id){
+            if(updatedJob.id === job.id){
                 return updatedJob
             }else{
                 return job

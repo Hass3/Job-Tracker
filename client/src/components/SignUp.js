@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { useNavigate } from "react-router-dom";
 import './loginandsignup.css'
 function SignUp() {
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
     const [showPassword,setShowPassword] = useState(false);
     const fromSchema = yup.object().shape({
         name: yup.string().required('Name is Required!'),

@@ -31,7 +31,7 @@ function Home() {
               <li><strong>Add, Edit Or Remove A Company or Job for that Company</strong></li>
               <li><strong>Submit A Personal Application status to help organize all of your applications</strong></li>
               <h3>To Start Please Press Contiune:</h3>
-              <Link to='/companies'><button className="user-buttons">Contiune</button></Link>
+              <Link to='/jobs'><button className="user-buttons">Contiune</button></Link>
             </div>
           )
       }

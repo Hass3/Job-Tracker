@@ -53,36 +53,13 @@ with app.app_context():
     db.session.commit()
 
     users = [
-        User(name="John Doe", username="john_doe12"),
-        User(name="Jane Smith", username="jane_smith311"),
-        User(name="Alice Johnson", username="alice_j_92"),
-        User(name="Michael Brown", username="michael_brown88"),
-        User(name="Emily Davis", username="emily_d_77")
+        User(name="Hass", username="Hass313"),
     ]
 
-    users[0].password_hash = 'helloworld'
-    users[1].password_hash = '1234'
-    users[2].password_hash = 'securepass'
-    users[3].password_hash = 'testpassword'
-    users[4].password_hash = 'pass123'
+    users[0].password_hash = 'hass111'
 
     db.session.add_all(users)
     db.session.commit()
 
-    applications = [
-        Application(user_id=1, job_id=1, application_date="2025-03-17", status="Applied", notes="Excited for this role!"),
-        Application(user_id=2, job_id=2, application_date="2025-03-18", status="Interview Scheduled", notes="Looking forward to the interview."),
-        Application(user_id=3, job_id=3, application_date="2025-03-19", status="Rejected", notes="Received feedback."),
-        Application(user_id=4, job_id=4, application_date="2025-03-20", status="Offer Received", notes="Considering the offer."),
-        Application(user_id=5, job_id=5, application_date="2025-03-21", status="Applied", notes="Submitted application."),
-        Application(user_id=1, job_id=6, application_date="2025-03-22", status="Pending", notes="Waiting for response."),
-        Application(user_id=2, job_id=7, application_date="2025-03-23", status="Applied", notes="First application to Tesla!"),
-        Application(user_id=3, job_id=8, application_date="2025-03-24", status="Interview Scheduled", notes="Scheduled for next week."),
-        Application(user_id=4, job_id=9, application_date="2025-03-25", status="Applied", notes="Applied with referral."),
-        Application(user_id=5, job_id=10, application_date="2025-03-26", status="Rejected", notes="Got an email response.")
-    ]
-
-    db.session.add_all(applications)
-    db.session.commit()
 
     print("Successfully seeded!")
