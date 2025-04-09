@@ -30,8 +30,8 @@ function Home() {
               <li><strong>Browse through listed compaines and browse through jobs for that company</strong></li>
               <li><strong>Add, Edit Or Remove A Company or Job for that Company</strong></li>
               <li><strong>Submit A Personal Application status to help organize all of your applications</strong></li>
-              <h3>To Start Please Press Contiune:</h3>
-              <Link to='/companies'><button className="user-buttons">Contiune</button></Link>
+              <h3>To Start Please Press Continue:</h3>
+              <Link to='/companies'><button className="user-buttons">Continue</button></Link>
             </div>
           )
       }

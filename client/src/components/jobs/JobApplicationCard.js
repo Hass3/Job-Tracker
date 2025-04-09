@@ -2,19 +2,17 @@
 
 
 function JobApplicaionCard({a}){
-    
+    const {title,company_name} = a.job
+
     return(
-        <>
-        <h1>{a.user_name}</h1>
-        Salary: <h3>{a.job.salary}</h3>
-        <h3>{a.job.company_name}</h3>
-        Status: <p>{a.status}</p>
-        Notes: <p>{a.notes}</p>
-        </>
+        <div className="application-card">
+        <p><strong>Job:</strong> {title}</p>
+        <p><strong>Company:</strong> {company_name}</p>
+        <p><strong>Status:</strong>{a.status}</p>
+        <p><strong>Notes:</strong> {a.notes}</p>
+        <p><strong>Posted On: </strong>{a.application_date}</p>
+        </div>
     )
-
-
-
 }
 
 export default JobApplicaionCard
