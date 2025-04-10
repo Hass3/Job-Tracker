@@ -4,6 +4,7 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true);
   const [companies, setCompanies] = useState(null)
   const [jobs, setJobs] = useState(null)
   const [applications, setApplications] = useState([])
@@ -21,6 +22,7 @@ function UserProvider({ children }) {
         setUser(null)
         setApplications([])
       }
+      setLoading(false)
     })
   }, [])
 
@@ -43,6 +45,7 @@ const onAddApplication = (newA)=>{
 
   const contextValue ={
     user,
+    loading,
     setUser,
     companies, 
     setCompanies,

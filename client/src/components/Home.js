@@ -1,11 +1,7 @@
 
-import { useContext, useEffect, useState } from "react"
-import NavBar from "./NavBar"
-import { UserContext } from "../UserContext"
 import { Link } from "react-router-dom"
 import './home.css';
 function Home() {
-  const { user, setUser } = useContext(UserContext)
   
 
   return (

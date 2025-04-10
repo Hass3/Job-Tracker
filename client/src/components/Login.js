@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext,useEffect } from "react"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import NavBar from "./NavBar";
@@ -7,9 +7,9 @@ import { UserContext } from "../UserContext";
 import './loginandsignup.css'
 function Login() {
     const [showPassword,setShowPassword] = useState(false)
-    const navagate = useNavigate()
+    const navigate = useNavigate()
     
-    const { setUser ,setApplications} = useContext(UserContext)
+    const {user, setUser ,setApplications} = useContext(UserContext)
 
     const fromSchema = yup.object().shape({
         username: yup.string().required('Must Enter username'),
@@ -40,7 +40,7 @@ function Login() {
                         r.json().then(user => {
                             setUser(user)
                             setApplications(user.applications)
-                            navagate('/jobs')
+                            navigate('/jobs')
                         })
                     }
                     else{
@@ -53,7 +53,11 @@ function Login() {
                 
         }
     })
-
+    useEffect(() => {
+        if (user) {
+            navigate('/companies');
+        }
+    }, [user, navigate]);
     return (
         <>
             <NavBar />

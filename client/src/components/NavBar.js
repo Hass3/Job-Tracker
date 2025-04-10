@@ -46,7 +46,7 @@ function NavBar() {
         )
           :
           (<>
-
+           
             <NavLink className='navlink' to='/companies'>
               Companies
             </NavLink>

@@ -1,15 +1,17 @@
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function ProtectedRoute({childeren}){
-const {user} = useContext(UserContext)
+function ProtectedRoute({children }){
+const {user,loading} = useContext(UserContext)
+const navigate = useNavigate()
+if (loading) return <h2>Loading...</h2>
 
-if (!user){
-    return <Navigate to="/login" replace />
-}
+if (!user) navigate('/login')
 
-return childeren
+
+
+return children 
 }
 
 export default ProtectedRoute

@@ -7,6 +7,7 @@ import JobDetails from "./components/jobs/JobDetails";
 import JobsPage from "./components/jobs/JobsPage";
 import JobApplicationDetails from "./components/jobs/JopApplicationDetails";
 import ProtectedRoute from "./ProtectedRoute";
+
 const routes = [
     { path: '/', element:<Home/>},
 

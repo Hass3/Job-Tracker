@@ -1,4 +1,4 @@
-import { useNavigate, useParams,Link } from "react-router-dom"
+import {useParams,Link } from "react-router-dom"
 import NavBar from "../NavBar"
 import { useContext, useEffect, useState } from "react"
 
