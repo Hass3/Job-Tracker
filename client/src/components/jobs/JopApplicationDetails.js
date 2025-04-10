@@ -65,7 +65,7 @@ function JobApplicationDetails() {
             </div>
             <div className="application-details-container">
                 <h3 className="job-title">{title}</h3>
-                <h4><strong>Salary:</strong>{salary}</h4>
+                <h4><strong>Salary:</strong>💰${salary}</h4>
                 <h4><strong>Location:</strong>{location}</h4>
                 <h4><strong>Description:{description}</strong></h4>
                 <h4><strong>Company:</strong>{company_name}</h4>

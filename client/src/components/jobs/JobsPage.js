@@ -16,7 +16,7 @@ function JobsPage(){
     <>
     <NavBar/>
     
-    <h1>Hello {user.name} these are all the jobs that you have appiled to. Feel free to edit or delete an application as needed.</h1>
+    <h1>Welcome Back {user.name}, Here are all the Jobs you've applied to. Feel free to click one for more Info and options</h1>
     <div className="application-container">
 
     {

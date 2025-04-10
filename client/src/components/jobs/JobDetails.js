@@ -36,7 +36,7 @@ function JobDetails() {
                     </Link>
             </div>
             <div className="job-details-contanier">
-               
+                
                 <h1 className="job-title">{job.title}</h1>
                 <h2 className="job-description">{job.description}</h2>
                 <h2 className="job-salary">💰 Salary: ${job.salary}</h2>
