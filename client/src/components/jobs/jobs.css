@@ -1,3 +1,6 @@
+.back-btn:hover{
+  background-color: #0056b3;
+}
 .job-details-container{
     max-width: 600px;
     margin: auto;
@@ -35,11 +38,9 @@
     margin-top: 15px;
 }
 
-.edit-btn,
-.delete-btn,
-.apply-btn,
-.delete-application {
-  background: #007bff;
+
+.apply-btn {
+  background: #28a745;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -49,19 +50,17 @@
 }
 
 
-.delete-btn,
-.delete-application {
-  background: #dc3545;
+.job-header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  margin-top: 10px;
+
 }
 
-.apply-btn {
-  background: #28a745;
-}
 
-.edit-btn:hover,
-.delete-btn:hover,
-.apply-btn:hover,
-.delete-application:hover {
+
+.apply-btn:hover{
   opacity: 0.6;
 }
 
@@ -110,6 +109,7 @@
   justify-self: center;
   font-weight: bold;
 }
+
 
 /*Application Form Styling*/
 .application-form-container {
@@ -190,4 +190,105 @@
 .application-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-4px);
+}
+.link{
+  text-decoration: none;
+  color: black;
+}
+
+/*Job application details styling*/
+.application-details-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.application-details-container h3,
+.application-details-container h4,
+.application-details-container h2 {
+  margin-bottom: 0.5rem;
+}
+.job-title{
+  justify-self: center;
+  font: 10px;
+}
+.application-details-container p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.application-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.application-buttons button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.application-buttons button:hover {
+  background-color: #0056b3;
+}
+
+/*Application Edit Form*/
+.application-edit-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.application-edit-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.application-edit-form select,
+.application-edit-form textarea {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  resize: vertical;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.application-edit-form textarea {
+  height: 120px;
+}
+
+.application-edit-form button {
+  margin-top: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.application-edit-form button:hover {
+  background-color: #0056b3;
 }

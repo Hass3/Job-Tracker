@@ -26,7 +26,8 @@ function ApplicationEditForm({application, onEdit, onEditBtn}){
     })
     return(
    <>
-    <form onSubmit={formik.handleSubmit}>
+   
+    <form className="application-edit-form" onSubmit={formik.handleSubmit}>
     <label>Set Status:</label>
    <select name="status" value={formik.values.status} onChange={formik.handleChange}>
           <option>Applied</option>
@@ -37,7 +38,8 @@ function ApplicationEditForm({application, onEdit, onEditBtn}){
         </select>
     <label>Notes:(optional)</label>
     <textarea name='notes' value={formik.values.notes} onChange={formik.handleChange}/>
-    <button>Complete</button>
+    <button type="submit">Complete</button>
+    <button onClick={()=>onEditBtn(on=>!on)}>Cancel Edit</button>
     </form>
 
    </>

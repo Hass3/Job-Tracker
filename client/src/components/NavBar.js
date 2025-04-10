@@ -46,17 +46,12 @@ function NavBar() {
         )
           :
           (<>
-            <NavLink
-              to='/'
-              className='navlink'
-            >
-              Home
-            </NavLink>
+
             <NavLink className='navlink' to='/companies'>
-              companies
+              Companies
             </NavLink>
             <NavLink className='navlink' to='/jobs'>
-              jobs
+              Jobs
             </NavLink>
             <button onClick={logOut} className="navLink">Logout</button>
           </>

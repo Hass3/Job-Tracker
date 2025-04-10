@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams,Link } from "react-router-dom"
 import NavBar from "../NavBar"
 import { useContext, useEffect, useState } from "react"
 
@@ -14,7 +14,7 @@ function JobDetails() {
     const userId = user?.id
     const parms = useParams()
     const jobId = parms.id
-    const navagate = useNavigate()
+
 
 
     useEffect(() => {
@@ -30,8 +30,13 @@ function JobDetails() {
     return (
         <>
             <NavBar />
-
+             <div className="job-header">
+                <Link to={`/companies/${job.company_id}`}>
+                    <button className="back-btn">Back</button>
+                    </Link>
+            </div>
             <div className="job-details-contanier">
+               
                 <h1 className="job-title">{job.title}</h1>
                 <h2 className="job-description">{job.description}</h2>
                 <h2 className="job-salary">💰 Salary: ${job.salary}</h2>

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
 import NavBar from "../NavBar"
 import CompanyJobs from "./CompanyJobs"
@@ -44,6 +44,15 @@ function CompanyDetails() {
                     setJobForm={setJobForm}
                 /> :
                 <>
+                <div className="company-header">
+                <Link to="/companies">
+              <button className="back-btn">Back</button>
+                </Link>
+            </div>
+                <div className="company-details">
+                 
+                
+             
                     <h2>{name}</h2>
                     <img alt={name} src={logo} />
                     <h2>{description}</h2>
@@ -57,6 +66,7 @@ function CompanyDetails() {
                         />
                     )}
                     </div>
+                </div>
                 </>
             }
 

@@ -1,7 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db, bcrypt
 from flask_login import UserMixin
-from sqlalchemy.orm import validates
 
 
 class User(db.Model, SerializerMixin, UserMixin):

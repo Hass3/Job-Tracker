@@ -39,7 +39,7 @@ function JobForm({ setJobForm, companyId, jobFormbtn }) {
     })
     return (
         <>
-            <button className="back-btn" onClick={jobFormbtn}>Back</button>
+            <button className="back-btn-form" onClick={jobFormbtn}>Back</button>
             <div className="company-form">
                 <h1 className="form-title">Add New Job</h1>
                 <form onSubmit={formik.handleSubmit}>

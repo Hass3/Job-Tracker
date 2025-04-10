@@ -43,7 +43,7 @@ function SignUp() {
                         r.json().then(user => {
                             setUser(user)
                             setApplications(user.applications)
-                            navagate('/')
+                            navagate('/jobs')
                         })
                     
                     }else{
