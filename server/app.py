@@ -255,8 +255,7 @@ class JobById(Resource):
 class ApplicationById(Resource):
     @login_required
     def delete(self,id):
-        current_user
-        application = Application.query.filter_by(id=id).first()
+        application = [a for a in current_user.applications if a.id == id][0]
         db.session.delete(application) 
         db.session.commit()
         return {},204 
@@ -281,6 +280,34 @@ class ApplicationById(Resource):
                         }
                     }
         return application, 200
+    
+    @login_required
+    def patch(self,id):
+        application = [a for a in current_user.applications if a.id == id][0]
+        for attr in request.get_json():
+            setattr(application,attr,request.get_json()[attr])
+        db.session.add(application)
+        db.session.commit()
+        application_dict = {
+                'id': application.id,
+                'status': application.status,
+                'application_date': application.application_date,
+                'notes': application.notes,
+                'job': {
+                    'id': application.job.id,
+                    'title': application.job.title,
+                    'salary':application.job.salary,
+                    'description':application.job.description,
+                    'location':application.job.location,
+                    'company_name':application.job.company.name
+                    }
+                }
+        return application_dict, 201
+        
+        
+        
+        
+        
 
 
 api.add_resource(Login, '/login')
