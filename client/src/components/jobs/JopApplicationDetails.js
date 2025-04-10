@@ -68,7 +68,7 @@ function JobApplicationDetails(){
     <p><strong>Notes:</strong> {application.notes}</p>
     <p><strong>Posted At:</strong> {application.application_date}</p>
     </div>
-    {isFormOn? <ApplicationEditForm onEdit={onEdit} application={application}/> : null}
+    {isFormOn? <ApplicationEditForm onEditBtn={onFormClick} onEdit={onEdit} application={application}/> : null}
     </>
 
 

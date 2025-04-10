@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
 import NavBar from "../NavBar"
 import CompanyJobs from "./CompanyJobs"
-import CompanyEditForm from "./CompanyEditForm"
 import { UserContext } from "../../UserContext"
 import JobForm from "../jobs/JobForm"
 import './companies.css'

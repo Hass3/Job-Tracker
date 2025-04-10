@@ -3,7 +3,7 @@ import * as yup from 'yup'
 
 
 
-function ApplicationEditForm({application, onEdit}){
+function ApplicationEditForm({application, onEdit, onEditBtn}){
     const formik = useFormik({
         initialValues:{
             status:`${application.status}`,
@@ -21,6 +21,7 @@ function ApplicationEditForm({application, onEdit}){
             })
             .then(r=>r.json())
             .then(application=>onEdit(application))
+            onEditBtn(on=>!on)
         }
     })
     return(

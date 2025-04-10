@@ -214,44 +214,12 @@ class CompanyById(Resource):
         }
         return company_dict, 200
     
-    @login_required
-    def patch(self,id):
-        company = Company.query.filter_by(id=id).first()
-        for attr in request.get_json():
-            setattr(company,attr,request.get_json()[attr])
-        db.session.add(company)
-        db.session.commit()
-        return company.to_dict(), 201
-    
-    @login_required
-    def delete(self,id):
-        company = Company.query.filter_by(id=id).first()
-        db.session.delete(company)
-        db.session.commit()
-        return{},204
-
 class JobById(Resource):
     @login_required
     def get(self, id):
         job = Job.query.filter_by(id=id).first()
         return job.to_dict(), 200
-    
-    @login_required
-    def patch(self,id):
-        job = Job.query.filter_by(id=id).first()
-        for attr in request.get_json():
-            setattr(job,attr,request.get_json()[attr])
-        db.session.add(job)
-        db.session.commit()
-        return job.to_dict(), 201
-    
-    @login_required
-    def delete(self,id):
-        job = Job.query.filter_by(id=id).first()
-        db.session.delete(job)
-        db.session.commit()
-        return{},204
-    
+        
 class ApplicationById(Resource):
     @login_required
     def delete(self,id):
@@ -304,11 +272,6 @@ class ApplicationById(Resource):
                 }
         return application_dict, 201
         
-        
-        
-        
-        
-
 
 api.add_resource(Login, '/login')
 api.add_resource(SignUp, '/signup')
