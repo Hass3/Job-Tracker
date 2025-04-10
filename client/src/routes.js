@@ -6,39 +6,33 @@ import CompanyDetails from "./components/companies/CompanyDetails";
 import JobDetails from "./components/jobs/JobDetails";
 import JobsPage from "./components/jobs/JobsPage";
 import JobApplicationDetails from "./components/jobs/JopApplicationDetails";
-
+import ProtectedRoute from "./ProtectedRoute";
 const routes = [
-    {
-        path: '/',
-        element:<Home/>
-    },
-    {
-        path:'/login',
-        element:<Login/>
-    },
-    {
-        path:'/signup',
-        element:<SignUp/>
-    }, 
+    { path: '/', element:<Home/>},
+
+    { path:'/login', element:<Login/>},
+
+    {path:'/signup',element:<SignUp/>},
+
     {
         path:'/companies',
-        element:<CompaniesPage/>
+        element:<ProtectedRoute><CompaniesPage/></ProtectedRoute>
     }, 
     {
         path:'/companies/:id',
-        element:<CompanyDetails/>
+        element:<ProtectedRoute><CompanyDetails/></ProtectedRoute>
     },
     {
         path:'/jobs/:id',
-        element:<JobDetails/>
+        element:<ProtectedRoute><JobDetails/></ProtectedRoute>
     },
     {
         path:'/jobs',
-        element:<JobsPage/>
+        element:<ProtectedRoute><JobsPage/></ProtectedRoute>
     },
     {
         path:'/job/:id',
-        element:<JobApplicationDetails/>
+        element:<ProtectedRoute><JobApplicationDetails/></ProtectedRoute>
     }
 
 ]
