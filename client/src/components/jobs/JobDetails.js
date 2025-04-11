@@ -39,8 +39,8 @@ function JobDetails() {
                 
                 <h1 className="job-title">{job.title}</h1>
                 <h2 className="job-description">{job.description}</h2>
+                <h2 className="job-description">Location of work: {job.location}</h2>
                 <h2 className="job-salary">💰 Salary: ${job.salary}</h2>
-
                 <div className="button-container">
 
                     <button className="apply-btn" onClick={applyBtnClick}>{!applicationFormBtn ? 'Apply' : 'Cancel'}</button>

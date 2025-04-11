@@ -27,7 +27,7 @@ function ApplicationEditForm({application, onEdit, onEditBtn}){
     return(
    <>
    
-    <form className="application-edit-form" onSubmit={formik.handleSubmit}>
+    <form className="edit-form" onSubmit={formik.handleSubmit}>
     <label>Set Status:</label>
    <select name="status" value={formik.values.status} onChange={formik.handleChange}>
           <option>Applied</option>

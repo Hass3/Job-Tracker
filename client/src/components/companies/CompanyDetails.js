@@ -8,12 +8,12 @@ import './companies.css'
 
 function CompanyDetails() {
     const [company, setCompany] = useState(null)
-    const [formOn, setFormOn] = useState(false)
+
     const [jobForm, setJobForm] = useState(false)
-    const { companies, setCompanies, jobs, setJobs } = useContext(UserContext)
+    const { jobs, setJobs } = useContext(UserContext)
     const parms = useParams()
     const companyId = parms.id
-    const navigate = useNavigate()
+  
 
     useEffect(() => {
         fetch(`/companies/${companyId}`)

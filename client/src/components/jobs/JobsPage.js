@@ -1,29 +1,28 @@
-import JobApplicaionCard from "./JobApplicationCard";
+
 import { useContext } from "react";
 import NavBar from "../NavBar";
 import { UserContext } from "../../UserContext";
+import JobCards from "./JobCards";
 
 
 
 
 function JobsPage(){
-    const {user, applications}=useContext(UserContext)
-   
-    const sortedApplications = [...applications].reverse()
-    if (!user) return <h1>Loading...</h1>
+    const {user,userJobs}=useContext(UserContext)
 
+  
     return(
     <>
     <NavBar/>
     
     <h1>Welcome Back {user.name}, Here are all the Jobs you've applied to. Feel free to click one for more Info and options</h1>
-    <div className="application-container">
-
+    <div className="job-container">
+    
     {
-        sortedApplications.map(a=>
-            <JobApplicaionCard
-            key={a.id}
-            a={a}
+        userJobs.map(j=>
+            <JobCards
+            key={j.id}
+            j={j}
             />
         
         )

@@ -24,23 +24,7 @@ class Login(Resource):
             'id': user.id,
             'name': user.name,
             'username': user.username,
-             'applications': [
-                    {
-                        'id': a.id,
-                        'status': a.status,
-                        'application_date': a.application_date,
-                        'notes': a.notes,
-                        'job': {
-                            'id': a.job.id,
-                            'title': a.job.title,
-                            'salary':a.job.salary,
-                            'description':a.job.description,
-                            'location':a.job.location,
-                            'company_name':a.job.company.name,
-                        }
-                    }
-                    for a in current_user.applications if a.user_id == current_user.id
-                ]
+            'jobs':[j.to_dict() for j in user.jobs]
             }
         return user_dict, 200
     
@@ -65,23 +49,7 @@ class SignUp(Resource):
                 'id': user.id,
                 'name': user.name,
                 'username': user.username,
-                'applications': [
-                    {
-                        'id': a.id,
-                        'status': a.status,
-                        'application_date': a.application_date,
-                        'notes': a.notes,
-                        'job': {
-                             'id': a.job.id,
-                            'title': a.job.title,
-                            'salary':a.job.salary,
-                            'description':a.job.description,
-                            'location':a.job.location,
-                            'company_name':a.job.company.name,
-                        }
-                    }
-                    for a in current_user.applications if a.user_id == current_user.id
-                ]
+                'jobs':[j.to_dict() for j in user.jobs]
             }
         return user_dict,201
 
@@ -100,23 +68,7 @@ class CurrentUser(Resource):
                 'id': current_user.id,
                 'name': current_user.name,
                 'username': current_user.username,
-                'applications': [
-                    {
-                        'id': a.id,
-                        'status': a.status,
-                        'application_date': a.application_date,
-                        'notes': a.notes,
-                        'job': {
-                          'id': a.job.id,
-                            'title': a.job.title,
-                            'salary':a.job.salary,
-                            'description':a.job.description,
-                            'location':a.job.location,
-                            'company_name':a.job.company.name,
-                        }
-                    }
-                    for a in current_user.applications
-                ]
+                'jobs':[j.to_dict() for j in current_user.jobs]
             }
             return user_dict, 200
         else:
@@ -179,22 +131,14 @@ class Jobs(Resource):
 class Applications(Resource):
     @login_required
     def post(self):
-        new_application = Application(application_date = request.get_json()['application_date'],status = request.get_json()['status'],notes = request.get_json()['notes'],job_id = int(request.get_json()['job_id']),  user_id = int(request.get_json()['user_id']))
+        new_application = Application(application_date = request.get_json()['application_date'],status = request.get_json()['status'],notes = request.get_json()['notes'],job_id = int(request.get_json()['job_id']),user_id= current_user.id)
         db.session.add(new_application)
         db.session.commit()
         new_application_dict = {
                         'id': new_application.id,
                         'status': new_application.status,
                         'application_date': new_application.application_date,
-                        'notes': new_application.notes,
-                        'job': {
-                            'id': new_application.job.id,
-                            'title': new_application.job.title,
-                            'salary':new_application.job.salary,
-                            'description':new_application.job.description,
-                            'location':new_application.job.location,
-                            'company_name':new_application.job.company.name
-                        }
+                        'notes': new_application.notes
                     }
                
         return new_application_dict, 201
@@ -219,38 +163,26 @@ class JobById(Resource):
         job = Job.query.filter_by(id=id).first()
         return job.to_dict(), 200
         
+class UserJobById(Resource):
+    def get(self,id):
+        job = next((j for j in current_user.jobs if j.id == id), None)
+        filtered_apps = [a.to_dict() for a in job.applications if a.user_id == current_user.id]
+        job_dict = job.to_dict()
+        job_dict['applications'] = filtered_apps
+        
+        return job_dict, 200
+    
 class ApplicationById(Resource):
     @login_required
     def delete(self,id):
-        application = [a for a in current_user.applications if a.id == id][0]
+        application = next((a for a in current_user.applications if a.id == id), None)
         db.session.delete(application) 
         db.session.commit()
         return {},204 
     
     @login_required
-    def get(self,id):
-        application = None
-        for a in current_user.applications:
-            if a.id == id:
-                application = {
-                    'id': a.id,
-                    'status': a.status,
-                    'application_date': a.application_date,
-                    'notes': a.notes,
-                    'job': {
-                        'id': a.job.id,
-                        'title': a.job.title,
-                        'salary':a.job.salary,
-                        'description':a.job.description,
-                        'location':a.job.location,
-                        'company_name':a.job.company.name
-                        }
-                    }
-        return application, 200
-    
-    @login_required
     def patch(self,id):
-        application = [a for a in current_user.applications if a.id == id][0]
+        application = next((a for a in current_user.applications if a.id == id), None)
         for attr in request.get_json():
             setattr(application,attr,request.get_json()[attr])
         db.session.add(application)
@@ -259,15 +191,7 @@ class ApplicationById(Resource):
                 'id': application.id,
                 'status': application.status,
                 'application_date': application.application_date,
-                'notes': application.notes,
-                'job': {
-                    'id': application.job.id,
-                    'title': application.job.title,
-                    'salary':application.job.salary,
-                    'description':application.job.description,
-                    'location':application.job.location,
-                    'company_name':application.job.company.name
-                    }
+                'notes': application.notes
                 }
         return application_dict, 201
         
@@ -282,6 +206,6 @@ api.add_resource(Applications,'/applications')
 api.add_resource(CompanyById, '/companies/<int:id>')
 api.add_resource(JobById, '/jobs/<int:id>')
 api.add_resource(ApplicationById,'/applications/<int:id>')
-
+api.add_resource(UserJobById,'/job/<int:id>')
 if __name__ == '__main__':
     app.run(port=5555,debug=True)

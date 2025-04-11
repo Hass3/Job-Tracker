@@ -3,8 +3,8 @@ import { useContext } from "react"
 import { UserContext } from "../UserContext"
 import './navbar.css'
 function NavBar() {
-  const { user, setUser,setApplications } = useContext(UserContext)
-  const navagate = useNavigate()
+  const { user, setUser,setApplications, setUserJobs} = useContext(UserContext)
+  const navigate = useNavigate()
   const logOut = () => {
     fetch('/logout', {
       method: 'POST',
@@ -13,7 +13,8 @@ function NavBar() {
       if (r.ok) {
         setUser(null)
         setApplications([])
-        navagate('/')
+        setUserJobs([])
+        navigate('/')
       }
     })
   }

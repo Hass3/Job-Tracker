@@ -167,128 +167,169 @@
   opacity: 0.8;
 }
 
-/*JobApplication Page*/
-.application-container{
+/*Job Cards*/
+.job-container {
   display: flex;
-  flex-wrap: wrap;       
-  justify-content: flex-start;
-  gap: 1rem;
-  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 16px;
+  padding: 20px;
 }
 
-.application-card {
-  background-color: #ffffff;
+.job-card {
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 1rem;
-  width: 180px; 
-  height: auto;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  cursor: pointer;
-}
-
-.application-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-4px);
-}
-.link{
-  text-decoration: none;
-  color: black;
-}
-
-/*Job application details styling*/
-.application-details-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #fdfdfd;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.application-details-container h3,
-.application-details-container h4,
-.application-details-container h2 {
-  margin-bottom: 0.5rem;
-}
-.job-title{
-  justify-self: center;
-  font: 10px;
-}
-.application-details-container p {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-}
-
-.application-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.application-buttons button {
-  background-color: #007bff;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.application-buttons button:hover {
-  background-color: #0056b3;
-}
-
-/*Application Edit Form*/
-.application-edit-form {
+  padding: 16px;
+  margin: 12px auto;
   max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
 }
 
-.application-edit-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
+.job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.job-card h3 {
+  margin: 0;
   color: #333;
 }
 
-.application-edit-form select,
-.application-edit-form textarea {
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  font-size: 1rem;
+.job-card p, .job-card h4 {
+  margin: 6px 0;
+  color: #555;
+}
+
+/*User Job Details Page*/
+.details-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+.job-info h3 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.job-info h4 {
+  margin: 6px 0;
+  color: #444;
+}
+
+.applications-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+/*Application Card Styling*/
+.application-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  width: 280px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.2s ease;
+}
+
+.application-card:hover {
+  transform: translateY(-2px);
+}
+
+.application-card h1 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.application-card p {
+  margin: 4px 0;
+  color: #555;
+}
+
+.application-btn {
+  padding: 8px 12px;
+  margin: 6px 4px 0 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #0077ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.application-btn:hover {
+  background-color: #005fcc;
+}
+
+.application-btn.remove {
+  background-color: #e74c3c;
+}
+
+.application-btn.remove {
+  background-color: #c0392b;
+}
+
+/*Edit Application Form*/
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fefefe;
+  width: 280px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.edit-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-form select,
+.edit-form textarea {
+  padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
   resize: vertical;
-  font-family: inherit;
-  box-sizing: border-box;
 }
 
-.application-edit-form textarea {
-  height: 120px;
+.edit-form textarea {
+  min-height: 60px;
 }
 
-.application-edit-form button {
-  margin-top: 1.5rem;
+.edit-form button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
   background-color: #007bff;
   color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 12px;
+  font-weight: 500;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
-.application-edit-form button:hover {
+.edit-form button:hover {
   background-color: #0056b3;
 }
+

@@ -9,17 +9,20 @@ function UserProvider({ children }) {
   const [jobs, setJobs] = useState(null)
   const [applications, setApplications] = useState([])
   const [job, setJob] = useState(null)
+  const[userJobs, setUserJobs]= useState([])
 
   useEffect(() => {
     fetch('/current_user').then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-          setApplications(user.applications)
+          setUserJobs(user.jobs)
+          
         })
       }
       else {
         setUser(null)
+        setUserJobs([])
         setApplications([])
       }
       setLoading(false)
@@ -36,6 +39,12 @@ function UserProvider({ children }) {
 
  const onAddJob = (newJob)=>{
   setJobs([...jobs,newJob])
+}
+
+const onAddUserJob=(newjob) =>{
+  if(!userJobs.some(userJob => userJob.id === newjob.id)) {
+    setUserJobs([...userJobs,newjob])
+  }
 }
 
 const onAddApplication = (newA)=>{
@@ -56,7 +65,10 @@ const onAddApplication = (newA)=>{
     applications,
     setApplications,
     job,
-    setJob
+    setJob,
+    userJobs,
+    setUserJobs,
+    onAddUserJob
 
   }
   

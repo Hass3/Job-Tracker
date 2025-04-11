@@ -6,8 +6,8 @@ import { UserContext } from "../../UserContext"
 
 
 
-function ApplicationForm({jobId, userId, setApplyBtn }) {
-  const {onAddApplication,job} = useContext(UserContext)
+function ApplicationForm({jobId, setApplyBtn }) {
+  const {onAddApplication,job, onAddUserJob,user} = useContext(UserContext)
    
   const formSchema = yup.object().shape({
     'status': yup.string().required('status is required')
@@ -26,12 +26,16 @@ function ApplicationForm({jobId, userId, setApplyBtn }) {
           'application_date': new Date().toLocaleString(),
           ...values,
           'job_id': jobId,
-          'user_id': userId,
+          'user_id': user.id,
           'job': job
         })
       })
         .then(r => r.json())
-        .then(app => onAddApplication(app))
+        .then(app =>{
+          onAddApplication(app)
+          onAddUserJob(job)
+          
+        })
       setApplyBtn(on => !on)
     }
   })
